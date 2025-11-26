@@ -102,7 +102,7 @@ const Hero = () => {
   }, [displayText, glitchCount])
 
   return (
-    <section className="relative w-full h-screen bg-black flex items-center justify-center overflow-hidden">
+    <section className="relative w-full min-h-screen bg-black flex items-center justify-center overflow-hidden px-4 py-8 sm:py-0">
       {/* Glitch effect styles */}
       <style>{`
         @keyframes glitch {
@@ -135,6 +135,12 @@ const Hero = () => {
         .hero-text-container {
           position: relative;
           display: inline-block;
+          word-break: break-word;
+          background: linear-gradient(135deg, #ffffff 0%, #00d9ff 50%, #0099ff 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent;
         }
 
         .unbounded-text-with-image {
@@ -146,17 +152,41 @@ const Hero = () => {
           background-clip: text;
           -webkit-text-fill-color: transparent;
           color: white;
+          word-break: break-word;
+        }
+
+        @keyframes apocalypseGlow {
+          0%, 100% {
+            text-shadow: 0 0 10px #FFD700, 0 0 20px #FFA500, 0 0 30px #FF8C00;
+            filter: brightness(1.2);
+          }
+          50% {
+            text-shadow: 0 0 20px #FFD700, 0 0 40px #FFA500, 0 0 60px #FF8C00, 0 0 80px #FF6347;
+            filter: brightness(1.5);
+          }
+        }
+
+        .apocalypse-glow {
+          animation: apocalypseGlow 2s ease-in-out infinite;
         }
 
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap');
+
+        @media (max-width: 640px) {
+          .hero-text-container,
+          .unbounded-text-with-image {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+          }
+        }
       `}</style>
 
-      <div className="relative z-10 text-center px-4">
+      <div className="relative z-10 text-center w-full">
         {displayText === "unboundedraj" ? (
-          <div className="relative inline-block">
+          <div className="relative inline-block w-full">
             {/* Text with image background */}
             <h1
-              className={`unbounded-text-with-image text-8xl md:text-9xl font-bold leading-tight ${
+              className={`unbounded-text-with-image text-5xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[158px] font-bold leading-tight ${
                 isGlitching ? "glitch-text" : ""
               }`}
               style={{
@@ -170,20 +200,18 @@ const Hero = () => {
           </div>
         ) : (
           <h1
-            className="text-6xl md:text-7xl font-bold text-white leading-tight hero-text-container"
+            className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight hero-text-container"
           >
             {displayText}
           </h1>
         )}
         
         {/* Static subtitle that always remains */}
-        <div className="mt-8 flex items-center justify-center gap-3">
-          <span className="text-white text-xl md:text-2xl font-mono font-light opacity-80">
-            &lt;/&gt;
-          </span>
-          <p className="text-white text-xl md:text-2xl font-sans font-light tracking-wide" 
+        <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
+          
+          <p className="text-yellow-400 text-base sm:text-xs md:text-xs lg:text-2xl font-sans font-light tracking-wide apocalypse-glow" 
              style={{ fontFamily: "'Inter', sans-serif" }}>
-            Creative Developer & Content Creator
+            # DHRUV RAJ SINGH
           </p>
         </div>
       </div>
