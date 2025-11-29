@@ -30,7 +30,7 @@ const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [glitchCount, setGlitchCount] = useState(0)
 
-  const textSequence = ["Being Creative", "Being Delusional", "Being Awesome", "Being Limitless", "Being Unbounded"]
+  const textSequence = ["Being Creative", "Being Delusional", "Being Awesome", "Being Limitless"]
 
   useEffect(() => {
     let sequenceIndex = 0
@@ -102,7 +102,7 @@ const Hero = () => {
   }, [displayText, glitchCount])
 
   return (
-    <section className="relative w-full min-h-screen bg-black flex items-center justify-center overflow-hidden px-4 py-8 sm:py-0">
+    <section id="home" className=" relative w-full min-h-screen bg-[#101010] flex items-center justify-center overflow-hidden px-4 py-8 sm:py-0">
       {/* Glitch effect styles */}
       <style>{`
         @keyframes glitch {
@@ -136,7 +136,7 @@ const Hero = () => {
           position: relative;
           display: inline-block;
           word-break: break-word;
-          background: linear-gradient(135deg, #ffffff 0%, #00d9ff 50%, #0099ff 100%);
+          background: linear-gradient(135deg, #e0e0e0 0%, #808080 50%, #404040 100%);
           -webkit-background-clip: text;
           background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -184,6 +184,10 @@ const Hero = () => {
       <div className="relative z-10 text-center w-full">
         {displayText === "unboundedraj" ? (
           <div className="relative inline-block w-full">
+            {/* Label above text */}
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl font-light text-gray-400 mb-1 tracking-wide">
+              Aka
+            </p>
             {/* Text with image background */}
             <h1
               className={`unbounded-text-with-image text-5xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[158px] font-bold leading-tight ${
@@ -199,11 +203,17 @@ const Hero = () => {
             </h1>
           </div>
         ) : (
-          <h1
-            className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight hero-text-container"
-          >
-            {displayText}
-          </h1>
+          <div className="relative inline-block w-full">
+            {/* Label above text */}
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl font-light text-gray-400 mb-1 tracking-wide">
+              I'm known for
+            </p>
+            <h1
+              className="text-5xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[158px] font-bold leading-tight hero-text-container"
+            >
+              {displayText}
+            </h1>
+          </div>
         )}
         
         {/* Static subtitle that always remains */}
@@ -211,7 +221,7 @@ const Hero = () => {
           
           <p className="text-yellow-400 text-base sm:text-xs md:text-xs lg:text-2xl font-sans font-light tracking-wide apocalypse-glow" 
              style={{ fontFamily: "'Inter', sans-serif" }}>
-            # DHRUV RAJ SINGH
+            # No Limits
           </p>
         </div>
       </div>
