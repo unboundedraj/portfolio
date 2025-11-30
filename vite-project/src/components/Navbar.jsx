@@ -16,6 +16,21 @@ export default function Navbar() {
     return () => clearInterval(timer)
   }, [])
 
+  // Add smooth scroll behavior to html
+  useEffect(() => {
+    const html = document.documentElement
+    html.style.scrollBehavior = 'smooth'
+    
+    // Fallback for browsers that don't support smooth scroll
+    if (!('scrollBehavior' in html.style)) {
+      console.warn('Smooth scroll not supported, using polyfill')
+    }
+    
+    return () => {
+      html.style.scrollBehavior = 'auto'
+    }
+  }, [])
+
   const navLinks = [
     { name: "Home", id: "home" },
     { name: "About", id: "about" },
@@ -30,7 +45,28 @@ export default function Navbar() {
   const scrollToSection = (id) => {
     const element = document.getElementById(id)
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      const targetPosition = element.getBoundingClientRect().top + window.scrollY
+      const startPosition = window.scrollY
+      const distance = targetPosition - startPosition
+      const duration = 1000 // 1 second
+      let start = null
+
+      const smoothScroll = (currentTime) => {
+        if (start === null) start = currentTime
+        const elapsed = currentTime - start
+        const progress = Math.min(elapsed / duration, 1)
+        
+        // Easing function for smooth animation
+        const easeInOutCubic = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+        
+        window.scrollTo(0, startPosition + distance * easeInOutCubic(progress))
+        
+        if (progress < 1) {
+          requestAnimationFrame(smoothScroll)
+        }
+      }
+
+      requestAnimationFrame(smoothScroll)
       setIsOpen(false)
     }
   }
@@ -191,7 +227,7 @@ export default function Navbar() {
                 }}
               >
                 {navLinks.map((link, index) => (
-                  <NavLink key={link.path} link={link} index={index} />
+                  <NavLink key={link.id} link={link} index={index} />
                 ))}
               </div>
 

@@ -102,7 +102,7 @@ const Hero = () => {
   }, [displayText, glitchCount])
 
   return (
-    <section id="home" className=" relative w-full min-h-screen bg-[#101010] flex items-center justify-center overflow-hidden px-4 py-8 sm:py-0">
+    <section  className=" relative w-full min-h-screen bg-[#101010] flex items-center justify-center overflow-hidden px-4 py-8 sm:py-0">
       {/* Glitch effect styles */}
       <style>{`
         @keyframes glitch {
@@ -209,7 +209,7 @@ const Hero = () => {
               I'm known for
             </p>
             <h1
-              className="text-5xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[158px] font-bold leading-tight hero-text-container"
+              className="text-5xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[122px] font-bold leading-tight hero-text-container"
             >
               {displayText}
             </h1>

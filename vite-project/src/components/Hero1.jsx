@@ -75,7 +75,7 @@ const Hero1 = () => {
 
 
   return (
-    <section
+    <section id="home"
       className="relative w-full min-h-screen flex items-center justify-center overflow-hidden rounded-b-[100px] lg:rounded-b-[150px]"
       style={{
         backgroundImage: showCreepy
@@ -187,8 +187,8 @@ const Hero1 = () => {
             zIndex: 10,
             maxWidth: '95vw',
             color: '#ced4da',
-            WebkitTextStroke: '2px white',
-            textStroke: '2px white',
+            WebkitTextStroke: '',
+            textStroke: '',
             paintOrder: 'stroke fill',
           }}
         >
