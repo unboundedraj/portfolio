@@ -5,6 +5,7 @@ import Hero1 from '../components/Hero1'
 import Footer from '../components/Footer'
 import About from '../components/About'
 import Transition from '../components/Transition'
+import Skills from '../components/Skills'
 function Home() {
   return (
     <div className=' bg-[#101010]'>
@@ -13,6 +14,7 @@ function Home() {
       <Hero/>
       <About/>
       <Transition/>
+      <Skills/>
       <Footer/>
 
     </div>
