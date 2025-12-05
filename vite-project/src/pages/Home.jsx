@@ -6,6 +6,7 @@ import Footer from '../components/Footer'
 import About from '../components/About'
 import Transition from '../components/Transition'
 import Skills from '../components/Skills'
+import Works from '../components/Works'
 function Home() {
   return (
     <div className=' bg-[#101010]'>
@@ -15,6 +16,7 @@ function Home() {
       <About/>
       <Transition/>
       <Skills/>
+      <Works/>
       <Footer/>
 
     </div>

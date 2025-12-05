@@ -9,6 +9,50 @@ import blackboxLogo from "../assets/logos/blackbox-ai-logo.jpg"
 import pinterestLogo from "../assets/logos/pinterest-logo.png"
 
 function Skills() {
+  const [showTitle, setShowTitle] = React.useState(false);
+  const [showContent, setShowContent] = React.useState(false);
+  const sectionRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Show title when section starts becoming visible (partial)
+        if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+          setShowTitle(true);
+          setShowContent(false);
+        }
+        
+        // When section is 75% visible, hide title and show content
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.75) {
+          setShowTitle(false);
+          setTimeout(() => {
+            setShowContent(true);
+          }, 300);
+        }
+        
+        // Reset when section leaves viewport
+        if (!entry.isIntersecting) {
+          setShowTitle(false);
+          setShowContent(false);
+        }
+      },
+      {
+        threshold: [0.1, 0.75],
+        rootMargin: '0px'
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   const skillsData = [
     // Backend & Runtime
     { name: "Node.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
@@ -122,83 +166,124 @@ function Skills() {
   ];
 
   return (
-    <div className="h-screen bg-[#101010] py-10 px-6 relative overflow-hidden flex items-center">
+    <div id="skills" ref={sectionRef} className="h-screen bg-[#101010] py-10 px-6 relative overflow-hidden flex items-center">
       {/* Subtle Decorative Elements */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-zinc-700/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 right-10 w-80 h-80 bg-zinc-600/5 rounded-full blur-3xl"></div>
+      <div className="absolute top-20 left-10 w-72 h-72 bg-zinc-700/5 rounded-full blur-3xl animate-float"></div>
+      <div className="absolute bottom-20 right-10 w-80 h-80 bg-zinc-600/5 rounded-full blur-3xl animate-float" style={{animationDelay: '1s'}}></div>
       
-      <div className="max-w-7xl mx-auto relative z-10 w-full">
-        {/* Header Section */}
-        <div className="text-center mb-8">
-          <div className="inline-block mb-2">
-            <span className="text-xs font-semibold text-zinc-400 bg-zinc-800/50 border border-zinc-700/50 px-3 py-1.5 rounded-full tracking-wide uppercase">
-              Technical Arsenal
-            </span>
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 leading-tight">
-            Technical Proficiency
-          </h2>
-          <p className="text-sm text-zinc-500 max-w-2xl mx-auto">
-            A comprehensive toolkit of modern technologies and AI-powered tools
-          </p>
+      {/* Big Title - Shows First */}
+      {showTitle && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center pointer-events-none">
+          <h1 className="text-7xl md:text-9xl font-black text-white tracking-tight">
+            My Skillset
+          </h1>
         </div>
+      )}
+      
+      {/* Main Content - Shows After Title Disappears */}
+      {showContent && (
+        <div className="max-w-7xl mx-auto relative z-40 w-full animate-fadeIn">
+          {/* Header Section */}
+          <div className="text-center mb-8">
+            <div className="inline-block mb-2">
+              <span className="text-xs font-semibold text-zinc-400 bg-zinc-800/50 border border-zinc-700/50 px-3 py-1.5 rounded-full tracking-wide uppercase">
+                Technical Arsenal
+              </span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 leading-tight">
+              Technical Proficiency
+            </h2>
+            <p className="text-sm text-zinc-500 max-w-2xl mx-auto">
+              A comprehensive toolkit of modern technologies and AI-powered tools
+            </p>
+          </div>
 
-        {/* Skills Grid - Scrollable */}
-        <div className="relative max-h-[calc(100vh-220px)] overflow-y-auto px-2 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
-          <div className="flex flex-wrap justify-center gap-2 items-center">
-            {skillsData.map((skill, index) => (
-              <div
-                key={index}
-                className="group"
-                style={{
-                  animation: `fadeInUp 0.5s ease-out forwards`,
-                  animationDelay: `${index * 0.02}s`,
-                  opacity: 0
-                }}
-              >
+          {/* Skills Grid - Scrollable */}
+          <div className="relative max-h-[calc(100vh-220px)] overflow-y-auto px-2 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
+            <div className="flex flex-wrap justify-center gap-2 items-center">
+              {skillsData.map((skill, index) => (
                 <div
-                  className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg border border-zinc-800 hover:border-zinc-700 transition-all duration-300 hover:shadow-lg hover:shadow-zinc-900/50 cursor-pointer ${
-                    skill.bgColor || "bg-zinc-900/50"
-                  }`}
+                  key={index}
+                  className="group animate-skillCard"
+                  style={{
+                    animationDelay: `${index * 0.02}s`
+                  }}
                 >
-                  <img
-                    src={skill.logo}
-                    alt={skill.name}
-                    className="w-4 h-4 object-contain transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <p
-                    className={`text-xs font-medium whitespace-nowrap ${
-                      skill.bgColor && skill.bgColor.includes('white') ? "text-gray-900" : 
-                      skill.bgColor && !skill.bgColor.includes('zinc') ? "text-white" : 
-                      "text-zinc-300"
+                  <div
+                    className={`flex items-center gap-2.5 px-3 py-2 rounded-lg border border-zinc-800 hover:border-zinc-700 transition-all duration-300 hover:shadow-lg hover:shadow-zinc-900/50 hover:-translate-y-1 cursor-pointer ${
+                      skill.bgColor || "bg-zinc-900/50"
                     }`}
                   >
-                    {skill.name}
-                  </p>
+                    <img
+                      src={skill.logo}
+                      alt={skill.name}
+                      className="w-5 h-5 object-contain transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <p
+                      className={`text-sm font-medium whitespace-nowrap ${
+                        skill.bgColor && skill.bgColor.includes('white') ? "text-gray-900" : 
+                        skill.bgColor && !skill.bgColor.includes('zinc') ? "text-white" : 
+                        "text-zinc-300"
+                      }`}
+                    >
+                      {skill.name}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom Text */}
+          <div className="text-center mt-5">
+            <p className="text-zinc-600 text-xs">
+              Constantly learning and expanding my technical horizon 
+            </p>
           </div>
         </div>
-
-        {/* Bottom Text */}
-        <div className="text-center mt-5">
-          <p className="text-zinc-600 text-xs">
-            Constantly learning and expanding my technical horizon 🚀
-          </p>
-        </div>
-      </div>
+      )}
 
       <style jsx>{`
-        @keyframes fadeInUp {
+        @keyframes fadeIn {
           from {
             opacity: 0;
-            transform: translateY(20px);
           }
           to {
             opacity: 1;
-            transform: translateY(0);
           }
+        }
+
+        @keyframes skillCard {
+          from {
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.5s ease-in forwards;
+        }
+
+        .animate-skillCard {
+          animation: skillCard 0.5s ease-out forwards;
+          opacity: 0;
+        }
+
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
         }
 
         /* Custom Scrollbar */
