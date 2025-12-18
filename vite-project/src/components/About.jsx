@@ -19,7 +19,7 @@ const About = () => {
     "Book Reader",
   ]
 
-  const slogan = " I want to know how much of an impact I can leave before I leave? "
+  const slogan = " I want to know how much of an impact I can make before I leave. "
 
   const CarouselRow = ({ direction }) => (
     <div className="relative overflow-hidden h-12 lg:h-14 mb-3">

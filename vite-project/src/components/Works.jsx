@@ -1,44 +1,111 @@
 import { useState, useEffect, useRef } from 'react';
-import { Code2, Database, Layout, Server, Smartphone, Globe } from 'lucide-react';
+import { Github, ExternalLink } from 'lucide-react';
+
+// Import project 1 images
+import p1i1 from '../assets/projects/p1i1.png';
+import p1i2 from '../assets/projects/p1i2.png';
+import p1i3 from '../assets/projects/p1i3.png';
+import p1i4 from '../assets/projects/p1i4.png';
+import p1i5 from '../assets/projects/p1i5.png';
+import p1i6 from '../assets/projects/p1i6.png';
+import p1i7 from '../assets/projects/p1i7.png';
+import p1i8 from '../assets/projects/p1i8.png';
+import p1i9 from '../assets/projects/p1i9.png';
+
+// Import project 2 images
+import p2i1 from '../assets/projects/p2i1.png';
+import p2i2 from '../assets/projects/p2i2.png';
+import p2i3 from '../assets/projects/p2i3.png';
+import p2i4 from '../assets/projects/p2i4.png';
+import p2i5 from '../assets/projects/p2i5.png';
+import p2i6 from '../assets/projects/p2i6.png';
+import p2i7 from '../assets/projects/p2i7.png';
 
 const Works = () => {
   const [visibleProjects, setVisibleProjects] = useState({});
   const projectRefs = useRef([]);
 
-  // Sample projects data
+  // Tech stack icons from jsDelivr
+  const techIcons = {
+    'React': 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/react.svg',
+    'Node.js': 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nodedotjs.svg',
+    'MongoDB': 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/mongodb.svg',
+    'Express': 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/express.svg',
+    'React Native': 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/react.svg',
+    'Firebase': 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/firebase.svg',
+    'Machine Learning': 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/scikitlearn.svg',
+    'Python': 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/python.svg',
+    'TensorFlow': 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/tensorflow.svg',
+    'Next.js': 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nextdotjs.svg',
+    'PostgreSQL': 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/postgresql.svg'
+  };
+
+  // Tech stack gradient colors
+  const techGradients = {
+    'React': 'from-cyan-400 to-blue-500',
+    'Node.js': 'from-yellow-400 to-amber-500',
+    'MongoDB': 'from-green-500 to-teal-500',
+    'Express': 'from-pink-400 to-rose-500',
+    'React Native': 'from-cyan-400 to-blue-500',
+    'Firebase': 'from-yellow-400 to-orange-500',
+    'Machine Learning': 'from-purple-400 to-pink-500',
+    'Python': 'from-blue-400 to-indigo-500',
+    'TensorFlow': 'from-orange-400 to-red-500',
+    'Next.js': 'from-black to-gray-700',
+    'PostgreSQL': 'from-blue-500 to-cyan-500'
+  };
+
+  // Projects data - Add as many projects as you want
   const projects = [
     {
       id: 1,
+      title: 'Client Website',
       images: [
-        'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=500&fit=crop',
-        'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop',
-        'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=500&fit=crop'
+        p1i1,
+        p1i2,
+        p1i3,
+        p1i4,
+        p1i5,
+        p1i6,
+        p1i7,
+        p1i8,
+        p1i9
       ],
-      description: 'A full-stack e-commerce platform with real-time inventory management and secure payment processing',
+      description: 'Web application for Rudrapriya Medical Equipments pvt ltd. The project serves as a client project for one of my client showcasing their company details and services that they provide.',
       techStack: [
-        { name: 'React', icon: <Layout className="w-5 h-5" /> },
-        { name: 'Node.js', icon: <Server className="w-5 h-5" /> },
-        { name: 'MongoDB', icon: <Database className="w-5 h-5" /> }
+        { name: 'React', icon: 'React' },
+        { name: 'Node.js', icon: 'Node.js' },
+        { name: 'MongoDB', icon: 'MongoDB' },
+        { name: 'Express', icon: 'Express' }
       ],
-      timeline: 'Mar 2024 - May 2024'
+      timeline: 'Mar 2024 - May 2024',
+      githubLink: 'https://github.com/unboundedraj/Rudrapriya',
+      liveLink: 'https://rudrapriyamedicalequipmentspvtltd.vercel.app'
     },
     {
       id: 2,
+      title: 'Case Study',
       images: [
-        'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=500&fit=crop',
-        'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=500&fit=crop',
-        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop'
+        p2i1,
+        p2i2,
+        p2i3,
+        p2i4,
+        p2i5,
+        p2i6,
+        p2i7
       ],
-      description: 'Mobile-first social networking app with real-time messaging and content sharing capabilities',
+      description: 'An intelligent attack detection framework for autonomous vehicles that leverages machine learning to identify and mitigate cybersecurity threats in real-time vehicle systems',
       techStack: [
-        { name: 'React Native', icon: <Smartphone className="w-5 h-5" /> },
-        { name: 'Firebase', icon: <Database className="w-5 h-5" /> },
-        { name: 'TypeScript', icon: <Code2 className="w-5 h-5" /> }
+        { name: 'Python', icon: 'Python' },
+        { name: 'TensorFlow', icon: 'TensorFlow' },
+        { name: 'Machine Learning', icon: 'Machine Learning' }
       ],
-      timeline: 'Jun 2024 - Aug 2024'
+      timeline: 'Jan 2024 - Apr 2024',
+      githubLink: 'https://github.com/yourusername/case-study'
     },
     {
       id: 3,
+      title: 'AI Analytics Dashboard',
       images: [
         'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=500&fit=crop',
         'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=500&fit=crop',
@@ -46,12 +113,31 @@ const Works = () => {
       ],
       description: 'AI-powered analytics dashboard for business intelligence with interactive data visualizations',
       techStack: [
-        { name: 'Next.js', icon: <Globe className="w-5 h-5" /> },
-        { name: 'Python', icon: <Code2 className="w-5 h-5" /> },
-        { name: 'PostgreSQL', icon: <Database className="w-5 h-5" /> }
+        { name: 'Next.js', icon: 'Next.js' },
+        { name: 'Python', icon: 'Python' },
+        { name: 'PostgreSQL', icon: 'PostgreSQL' }
       ],
-      timeline: 'Sep 2024 - Nov 2024'
-    }
+      timeline: 'Sep 2024 - Nov 2024',
+      liveLink: 'https://project3.com'
+    },
+    // Add more projects here:
+    // {
+    //   id: 4,
+    //   title: 'Your New Project',
+    //   images: [
+    //     project4img1,
+    //     project4img2,
+    //     project4img3
+    //   ],
+    //   description: 'Description of your project',
+    //   techStack: [
+    //     { name: 'Tech1', icon: <Code2 className="w-4 h-4" /> },
+    //     { name: 'Tech2', icon: <Database className="w-4 h-4" /> }
+    //   ],
+    //   timeline: 'Dec 2024 - Jan 2025',
+    //   githubLink: 'https://github.com/...',
+    //   liveLink: 'https://...'
+    // }
   ];
 
   const [currentImages, setCurrentImages] = useState(
@@ -61,7 +147,7 @@ const Works = () => {
     }, {})
   );
 
-  // Image carousel effect
+  // Image carousel effect - rotates through images every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImages(prev => {
@@ -91,26 +177,27 @@ const Works = () => {
         const elementCenter = elementTop + elementHeight / 2;
         const viewportCenter = scrollY + windowHeight / 2;
 
-        // Calculate distance from viewport center
-        const distance = Math.abs(viewportCenter - elementCenter);
-        const maxDistance = windowHeight / 2 + elementHeight / 2;
+        if (elementCenter > viewportCenter) {
+          const distance = Math.abs(viewportCenter - elementCenter);
+          const maxDistance = windowHeight / 2 + elementHeight / 2;
 
-        // Calculate scale and opacity (1 when centered, decreasing as it moves away)
-        let progress = 1 - Math.min(distance / maxDistance, 1);
-        progress = Math.max(0, progress);
+          let progress = 1 - Math.min(distance / maxDistance, 1);
+          progress = Math.max(0, progress);
 
-        // Easing function for smoother transition
-        const eased = progress * progress * (3 - 2 * progress);
+          const eased = progress * progress * (3 - 2 * progress);
+          const scale = 0.6 + (eased * 0.4);
+          const opacity = eased;
 
-        // Scale from 0.6 to 1
-        const scale = 0.6 + (eased * 0.4);
-        // Opacity from 0 to 1 for more dramatic effect
-        const opacity = eased;
-
-        setVisibleProjects(prev => ({
-          ...prev,
-          [index]: { scale, opacity }
-        }));
+          setVisibleProjects(prev => ({
+            ...prev,
+            [index]: { scale, opacity }
+          }));
+        } else {
+          setVisibleProjects(prev => ({
+            ...prev,
+            [index]: { scale: 1, opacity: 1 }
+          }));
+        }
       });
     };
 
@@ -125,14 +212,16 @@ const Works = () => {
   }, []);
 
   return (
-    <div className="min-h-screen py-20 px-6" style={{ backgroundColor: '#101010' }}>
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-5xl font-bold text-white mb-16 text-center">My Works</h1>
-        
+    <div className="min-h-screen py-20 px-4">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-6xl font-bold text-center mb-20 text-white">
+          My Works
+        </h1>
+
         <div className="space-y-32">
           {projects.map((project, index) => {
             const visibility = visibleProjects[index] || { scale: 0.6, opacity: 0 };
-            
+
             return (
               <div
                 key={project.id}
@@ -144,65 +233,107 @@ const Works = () => {
                 }}
               >
                 {/* Project Card */}
-                <div className="bg-black rounded-lg overflow-hidden shadow-2xl border border-gray-800 shadow-gray-900/50">
-                  {/* Image Container */}
-                  <div className="relative h-96 overflow-hidden">
-                    {project.images.map((img, imgIndex) => (
-                      <img
-                        key={imgIndex}
-                        src={img}
-                        alt={`Project ${project.id} - ${imgIndex + 1}`}
-                        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
-                        style={{
-                          opacity: currentImages[project.id] === imgIndex ? 1 : 0
-                        }}
-                      />
-                    ))}
-                    {/* Image indicators */}
-                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-                      {project.images.map((_, imgIndex) => (
-                        <div
+                <div className="bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden shadow-2xl border border-white/20">
+                  {/* Serial Number and Project Name / Timeline */}
+                  <div className="px-8 pt-6 pb-4 flex justify-between items-center">
+                    <h2 className="text-xl font-bold text-white">
+                      {String(index + 1).padStart(2, '0')} | {project.title}
+                    </h2>
+                    <p className="text-white/80 text-sm">{project.timeline}</p>
+                  </div>
+
+                  {/* Main Content - Side by Side Layout */}
+                  <div className="grid md:grid-cols-3 gap-0">
+                    {/* Left Side - Images */}
+                    <div className="relative h-96 overflow-hidden md:col-span-2 rounded-2xl">
+                      {project.images.map((img, imgIndex) => (
+                        <img
                           key={imgIndex}
-                          className="w-2 h-2 rounded-full transition-all duration-300"
+                          src={img}
+                          alt={`${project.title} - Image ${imgIndex + 1}`}
+                          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
                           style={{
-                            backgroundColor: currentImages[project.id] === imgIndex ? '#ffffff' : '#666666'
+                            opacity: currentImages[project.id] === imgIndex ? 1 : 0
                           }}
                         />
                       ))}
+
+                      {/* Image indicators */}
+                      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+                        {project.images.map((_, imgIndex) => (
+                          <div
+                            key={imgIndex}
+                            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                              currentImages[project.id] === imgIndex
+                                ? 'bg-white w-8'
+                                : 'bg-white/50'
+                            }`}
+                          />
+                        ))}
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Content Container */}
-                  <div className="p-8">
-                    {/* Description */}
-                    <p className="text-gray-300 text-lg mb-6 leading-relaxed">
-                      {project.description}
-                    </p>
+                    {/* Right Side - Text Content */}
+                    <div className="p-8 flex flex-col justify-between">
+                      {/* Description */}
+                      <div>
+                        <p className="text-white/90 text-base mb-6 leading-relaxed font-normal" style={{ fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}>
+                          {project.description}
+                        </p>
 
-                    {/* Tech Stack and Timeline Container */}
-                    <div className="flex items-end justify-between">
-                      {/* Tech Stack */}
-                      <div className="flex-1">
-                        <h3 className="text-gray-400 text-sm uppercase tracking-wider mb-3">Tech Stack</h3>
-                        <div className="flex gap-4 flex-wrap">
-                          {project.techStack.map((tech, techIndex) => (
-                            <div
-                              key={techIndex}
-                              className="flex items-center gap-2 bg-gray-900 px-4 py-2 rounded-lg border border-gray-800 hover:border-gray-600 transition-colors"
-                            >
-                              <span className="text-blue-400">{tech.icon}</span>
-                              <span className="text-gray-300 text-sm">{tech.name}</span>
-                            </div>
-                          ))}
+                        {/* Tech Stack */}
+                        <div className="mb-6">
+                          <h3 className="text-white font-semibold mb-3 text-sm uppercase tracking-wider">
+                            Tech Stack
+                          </h3>
+                          <div className="flex flex-wrap gap-2">
+                            {project.techStack.map((tech, techIndex) => (
+                              <div
+                                key={techIndex}
+                                className="flex items-center gap-2 bg-white/20 px-3 py-1.5 rounded-full text-white text-sm"
+                              >
+                                <img src={techIcons[tech.icon]} alt={tech.name} className="w-4 h-4" />
+                                <span className={`bg-gradient-to-r ${techGradients[tech.name]} bg-clip-text text-transparent font-thin`}>
+                                  {tech.name}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
                         </div>
-                      </div>
 
-                      {/* Timeline */}
-                      <div className="text-right ml-8">
-                        <p className="text-gray-500 text-sm mb-1">Timeline</p>
-                        <p className="text-gray-300 font-medium">{project.timeline}</p>
-                      </div>
-                    </div>
+                        {/* Timeline */}
+                        <div className="mb-6">
+                          <h3 className="text-white font-semibold mb-2 text-sm uppercase tracking-wider">
+                            Timeline
+                          </h3>
+                          <p className="text-white/80 text-base">{project.timeline}</p>
+                        </div>                      </div>
+
+                                            {/* Links */}
+                      <div className="flex gap-3 flex-wrap">
+                        {project.githubLink && (
+                          <a
+                            href={project.githubLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-5 py-2 bg-white/20 hover:bg-white/30 text-white rounded-full transition-colors duration-300 text-sm font-medium"
+                          >
+                            <Github className="w-4 h-4" />
+                            GitHub
+                          </a>
+                        )}
+                        {project.liveLink && (
+                          <a
+                            href={project.liveLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-5 py-2 bg-blue-500/80 hover:bg-blue-500 text-white rounded-full transition-colors duration-300 text-sm font-medium"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            Live Demo
+                          </a>
+                        )}
+                      </div>                    </div>
                   </div>
                 </div>
               </div>

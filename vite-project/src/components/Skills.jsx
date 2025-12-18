@@ -9,30 +9,19 @@ import blackboxLogo from "../assets/logos/blackbox-ai-logo.jpg"
 import pinterestLogo from "../assets/logos/pinterest-logo.png"
 
 function Skills() {
-  const [showTitle, setShowTitle] = React.useState(false);
   const [showContent, setShowContent] = React.useState(false);
   const sectionRef = React.useRef(null);
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Show title when section starts becoming visible (partial)
-        if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
-          setShowTitle(true);
-          setShowContent(false);
-        }
-        
-        // When section is 75% visible, hide title and show content
+        // Show content when section is 75% visible
         if (entry.isIntersecting && entry.intersectionRatio >= 0.75) {
-          setShowTitle(false);
-          setTimeout(() => {
-            setShowContent(true);
-          }, 300);
+          setShowContent(true);
         }
         
         // Reset when section leaves viewport
         if (!entry.isIntersecting) {
-          setShowTitle(false);
           setShowContent(false);
         }
       },
@@ -171,16 +160,7 @@ function Skills() {
       <div className="absolute top-20 left-10 w-72 h-72 bg-zinc-700/5 rounded-full blur-3xl animate-float"></div>
       <div className="absolute bottom-20 right-10 w-80 h-80 bg-zinc-600/5 rounded-full blur-3xl animate-float" style={{animationDelay: '1s'}}></div>
       
-      {/* Big Title - Shows First */}
-      {showTitle && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center pointer-events-none">
-          <h1 className="text-7xl md:text-9xl font-black text-white tracking-tight">
-            My Skillset
-          </h1>
-        </div>
-      )}
-      
-      {/* Main Content - Shows After Title Disappears */}
+      {/* Main Content */}
       {showContent && (
         <div className="max-w-7xl mx-auto relative z-40 w-full animate-fadeIn">
           {/* Header Section */}
