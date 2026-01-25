@@ -26,9 +26,7 @@ const HERO_IMAGES = [
 
 const Hero = () => {
   const [displayText, setDisplayText] = useState("Being Creative")
-  const [isGlitching, setIsGlitching] = useState(false)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [glitchCount, setGlitchCount] = useState(0)
 
   const textSequence = ["Being Creative", "Being Delusional", "Being Awesome", "Being Limitless"]
 
@@ -73,33 +71,18 @@ const Hero = () => {
     cycleTexts()
   }, [])
 
-  // Handle image rotation and glitch effects during "unboundedraj" display
+  // Handle image rotation during "unboundedraj" display
   useEffect(() => {
     if (displayText === "unboundedraj") {
       const imageInterval = setInterval(() => {
         setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length)
       }, 1000) // Change image every 1 second
 
-      // Trigger glitch effects only twice during the 8-second period
-      const glitchInterval = setInterval(() => {
-        if (glitchCount < 2) {
-          setIsGlitching(true)
-          setGlitchCount(prev => prev + 1)
-          
-          const glitchTimeout = setTimeout(() => {
-            setIsGlitching(false)
-          }, 300) // Glitch duration
-        }
-      }, 3000) // Trigger glitch every 3 seconds until we've done it twice
-
       return () => {
         clearInterval(imageInterval)
-        clearInterval(glitchInterval)
       }
-    } else {
-      setIsGlitching(false)
     }
-  }, [displayText, glitchCount])
+  }, [displayText])
 
   return (
     <section  className=" relative w-full min-h-screen bg-[#101010] flex items-center justify-center overflow-hidden px-4 py-8 sm:py-0">
@@ -190,9 +173,7 @@ const Hero = () => {
             </p>
             {/* Text with image background */}
             <h1
-              className={`unbounded-text-with-image text-5xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[158px] font-bold leading-tight ${
-                isGlitching ? "glitch-text" : ""
-              }`}
+              className="unbounded-text-with-image text-5xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-[158px] font-bold leading-tight"
               style={{
                 backgroundImage: `url(${HERO_IMAGES[currentImageIndex]})`,
                 backgroundSize: "cover",
