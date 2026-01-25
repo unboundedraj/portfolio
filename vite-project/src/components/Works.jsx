@@ -21,6 +21,35 @@ import p2i5 from '../assets/projects/p2i5.png';
 import p2i6 from '../assets/projects/p2i6.png';
 import p2i7 from '../assets/projects/p2i7.png';
 
+// Import project 3 images
+import p3i1 from '../assets/projects/p3i1.png';
+import p3i2 from '../assets/projects/p3i2.png';
+import p3i3 from '../assets/projects/p3i3.png';
+import p3i4 from '../assets/projects/p3i4.png';
+import p3i5 from '../assets/projects/p3i5.png';
+
+// Import project 4 images
+import p4i1 from '../assets/projects/p4i1.png';
+import p4i2 from '../assets/projects/p4i2.png';
+import p4i3 from '../assets/projects/p4i3.png';
+import p4i4 from '../assets/projects/p4i4.png';
+import p4i5 from '../assets/projects/p4i5.png';
+import p4i6 from '../assets/projects/p4i6.png';
+import p4i7 from '../assets/projects/p4i7.png';
+
+// Import project 5 images
+import p5i1 from '../assets/projects/p5i1.jpeg';
+import p5i2 from '../assets/projects/p5i2.png';
+import p5i3 from '../assets/projects/p5i3.png';
+import p5i4 from '../assets/projects/p5i4.png';
+import p5i5 from '../assets/projects/p5i5.png';
+import p5i6 from '../assets/projects/p5i6.png';
+import p5i7 from '../assets/projects/p5i7.png';
+import p5i8 from '../assets/projects/p5i8.png';
+import p5i9 from '../assets/projects/p5i9.png';
+import p5i10 from '../assets/projects/p5i10.png';
+import p5i11 from '../assets/projects/p5i11.png';
+
 const Works = () => {
   const [visibleProjects, setVisibleProjects] = useState({});
   const projectRefs = useRef([]);
@@ -37,7 +66,9 @@ const Works = () => {
     'Python': 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/python.svg',
     'TensorFlow': 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/tensorflow.svg',
     'Next.js': 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nextdotjs.svg',
-    'PostgreSQL': 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/postgresql.svg'
+    'PostgreSQL': 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/postgresql.svg',
+    'Contentstack': 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/contentstack.svg',
+    'Launch': 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/vercel.svg'
   };
 
   // Tech stack gradient colors
@@ -52,13 +83,59 @@ const Works = () => {
     'Python': 'from-blue-400 to-indigo-500',
     'TensorFlow': 'from-orange-400 to-red-500',
     'Next.js': 'from-black to-gray-700',
-    'PostgreSQL': 'from-blue-500 to-cyan-500'
+    'PostgreSQL': 'from-blue-500 to-cyan-500',
+    'Contentstack': 'from-purple-400 to-indigo-500',
+    'Launch': 'from-blue-400 to-cyan-500'
   };
 
   // Projects data - Add as many projects as you want
   const projects = [
     {
       id: 1,
+      title: 'Devdocs',
+      images: [
+        p4i1,
+        p4i2,
+        p4i3,
+        p4i4,
+        p4i5,
+        p4i6,
+        p4i7
+      ],
+      description: 'A comprehensive documentation website and developer portal where different developers and teams can contribute and collaborate on documentation for their websites and projects. Featuring a user-friendly interface for both contributors and readers.',
+      techStack: [
+        { name: 'Next.js', icon: 'Next.js' },
+        { name: 'Contentstack', icon: 'Contentstack' },
+        { name: 'Launch', icon: 'Launch' }
+      ],
+      timeline: 'Jan 26',
+      domain: 'devdocs.contentstackapps.com',
+      liveLink: 'https://devdocs.contentstackapps.com'
+    },
+    {
+      id: 2,
+      title: 'Pradaan Portal',
+      images: [
+        p3i1,
+        p3i2,
+        p3i3,
+        p3i4,
+        p3i5
+      ],
+      description: 'A centralized donations platform built on the MERN stack that enables seamless donation management and tracking. The platform provides an intuitive interface for donors to contribute and organizations to manage fundraising campaigns.',
+      techStack: [
+        { name: 'React', icon: 'React' },
+        { name: 'Node.js', icon: 'Node.js' },
+        { name: 'MongoDB', icon: 'MongoDB' },
+        { name: 'Express', icon: 'Express' }
+      ],
+      timeline: 'May 2024 - Jul 2024',
+      domain: 'pradaanportal.vercel.app',
+      githubLink: 'https://github.com/unboundedraj/pradaan-portal',
+      liveLink: 'https://pradaanportal.vercel.app'
+    },
+    {
+      id: 3,
       title: 'Client Website',
       images: [
         p1i1,
@@ -79,11 +156,12 @@ const Works = () => {
         { name: 'Express', icon: 'Express' }
       ],
       timeline: 'Mar 2024 - May 2024',
+      domain: 'rudrapriyamedicalequipmentspvtltd.vercel.app',
       githubLink: 'https://github.com/unboundedraj/Rudrapriya',
       liveLink: 'https://rudrapriyamedicalequipmentspvtltd.vercel.app'
     },
     {
-      id: 2,
+      id: 4,
       title: 'Case Study',
       images: [
         p2i1,
@@ -104,21 +182,33 @@ const Works = () => {
       githubLink: 'https://github.com/yourusername/case-study'
     },
     {
-      id: 3,
-      title: 'AI Analytics Dashboard',
+      id: 5,
+      title: 'Novasunsolar',
       images: [
-        'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=500&fit=crop',
-        'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=500&fit=crop',
-        'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=500&fit=crop'
+        p5i1,
+        p5i2,
+        p5i3,
+        p5i4,
+        p5i5,
+        p5i6,
+        p5i7,
+        p5i8,
+        p5i9,
+        p5i10,
+        p5i11
       ],
-      description: 'AI-powered analytics dashboard for business intelligence with interactive data visualizations',
+      description: 'Client website for Novasunsolar, a solar energy solutions provider. The project showcased their products, services, and sustainability initiatives.',
       techStack: [
-        { name: 'Next.js', icon: 'Next.js' },
-        { name: 'Python', icon: 'Python' },
-        { name: 'PostgreSQL', icon: 'PostgreSQL' }
+        { name: 'React', icon: 'React' },
+        { name: 'Node.js', icon: 'Node.js' },
+        { name: 'MongoDB', icon: 'MongoDB' },
+        { name: 'Express', icon: 'Express' }
       ],
-      timeline: 'Sep 2024 - Nov 2024',
-      liveLink: 'https://project3.com'
+      timeline: 'Oct 2023 - Dec 2023',
+      domain: 'novasunsolar.com',
+      discontinued: true,
+      githubLink:'https://github.com/unboundedraj/novasunsolar',
+      liveLink: 'https://www.novasunsolar.com'
     },
     // Add more projects here:
     // {
@@ -212,13 +302,13 @@ const Works = () => {
   }, []);
 
   return (
-    <div className="min-h-screen py-20 px-4">
+    <div id="works" className="min-h-screen works py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-6xl font-bold text-center mb-20 text-white">
           My Works
         </h1>
 
-        <div className="space-y-32">
+        <div className="space-y-16">
           {projects.map((project, index) => {
             const visibility = visibleProjects[index] || { scale: 0.6, opacity: 0 };
 
@@ -236,22 +326,29 @@ const Works = () => {
                 <div className="bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden shadow-2xl border border-white/20">
                   {/* Serial Number and Project Name / Timeline */}
                   <div className="px-8 pt-6 pb-4 flex justify-between items-center">
-                    <h2 className="text-xl font-bold text-white">
-                      {String(index + 1).padStart(2, '0')} | {project.title}
-                    </h2>
+                    <div className="flex items-center gap-3">
+                      <h2 className="text-xl font-bold text-white">
+                        {String(index + 1).padStart(2, '0')} | {project.title}
+                      </h2>
+                      {project.discontinued && (
+                        <span className="px-3 py-1 text-xs font-semibold bg-red-500/80 text-white rounded-full">
+                          Discontinued
+                        </span>
+                      )}
+                    </div>
                     <p className="text-white/80 text-sm">{project.timeline}</p>
                   </div>
 
                   {/* Main Content - Side by Side Layout */}
                   <div className="grid md:grid-cols-3 gap-0">
                     {/* Left Side - Images */}
-                    <div className="relative h-96 overflow-hidden md:col-span-2 rounded-2xl">
+                    <div className="relative h-full min-h-96 md:min-h-[500px] overflow-hidden md:col-span-2 rounded-2xl">
                       {project.images.map((img, imgIndex) => (
                         <img
                           key={imgIndex}
                           src={img}
                           alt={`${project.title} - Image ${imgIndex + 1}`}
-                          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
+                          className="absolute inset-0 w-full h-full object-contain transition-opacity duration-1000"
                           style={{
                             opacity: currentImages[project.id] === imgIndex ? 1 : 0
                           }}
@@ -307,9 +404,20 @@ const Works = () => {
                             Timeline
                           </h3>
                           <p className="text-white/80 text-base">{project.timeline}</p>
-                        </div>                      </div>
+                        </div>
 
-                                            {/* Links */}
+                        {/* Domain */}
+                        {project.domain && (
+                          <div className="mb-6">
+                            <h3 className="text-white font-semibold mb-2 text-sm uppercase tracking-wider">
+                              Domain
+                            </h3>
+                            <p className="text-white/80 text-base break-all">{project.domain}</p>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Links */}
                       <div className="flex gap-3 flex-wrap">
                         {project.githubLink && (
                           <a

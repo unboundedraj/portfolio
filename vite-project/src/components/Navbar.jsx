@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { Menu, X, ChevronRight, Download, MousePointerClick } from "lucide-react"
 import urImage from "../assets/ur.jpg"
+import resumePDF from "../assets/Dhruvrajsingh_resume_2025.pdf"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -43,6 +44,12 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen)
 
   const scrollToSection = (id) => {
+    if (id === 'resume') {
+      window.open(resumePDF, '_blank')
+      setIsOpen(false)
+      return
+    }
+    
     const element = document.getElementById(id)
     if (element) {
       const targetPosition = element.getBoundingClientRect().top + window.scrollY

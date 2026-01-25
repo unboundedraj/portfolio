@@ -29,15 +29,22 @@ function Footer() {
   ];
 
   const quickLinks = [
-    { name: 'Home', url: '#home' },
-    { name: 'About', url: '#about' },
-    { name: 'Works', url: '#works' },
-    { name: 'Skills', url: '#skills' },
-    { name: 'Blog', url: '#blog' }
+    { name: 'Home', id: 'home' },
+    { name: 'About', id: 'about' },
+    { name: 'Works', id: 'works' },
+    { name: 'Skills', id: 'skills' },
+    { name: 'Contact', id: 'contact' }
   ];
 
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  };
+
   return (
-    <div className="min-h-screen rounded-t-[100px] bg-black pt-20 pb-10 px-6">
+    <div id="contact" className="min-h-screen rounded-t-[100px] bg-black pt-20 pb-10 px-6">
       <div className="max-w-6xl mx-auto">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
@@ -68,13 +75,13 @@ function Footer() {
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <a
-                    href={link.url}
-                    className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
+                  <button
+                    onClick={() => scrollToSection(link.id)}
+                    className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group cursor-pointer bg-transparent border-none"
                   >
                     <span className="w-0 group-hover:w-2 h-0.5 bg-white transition-all duration-300"></span>
                     {link.name}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
