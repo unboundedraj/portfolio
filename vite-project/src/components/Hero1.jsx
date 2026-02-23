@@ -3,6 +3,7 @@ import urImage from "../assets/ur.jpg";
 import glassImage from "../assets/glass.jpg";
 import { FaGithub, FaLinkedin, FaXTwitter, FaInstagram, FaYoutube } from 'react-icons/fa6';
 import { SiCodeforces, SiLeetcode, SiHackerrank } from 'react-icons/si';
+import { SOCIAL_LINKS } from '../utils/socialLinks';
 
 const Hero1 = () => {
   const [showCreepy, setShowCreepy] = useState(false);
@@ -31,13 +32,13 @@ const Hero1 = () => {
   }, []);
 
   const allSocials = [
-    { name: 'Github', icon: FaGithub, color: '#000000', link: 'https://github.com' },
+    { name: 'Github', icon: FaGithub, color: '#000000', link: SOCIAL_LINKS.github },
     { name: 'Linkedin', icon: FaLinkedin, color: '#0A66C2', link: 'https://linkedin.com' },
     { name: 'X', icon: FaXTwitter, color: '#000000', link: 'https://x.com' },
-    { name: 'Instagram', icon: FaInstagram, color: '#E4405F', link: 'https://instagram.com' },
-    { name: 'Youtube', icon: FaYoutube, color: '#FF0000', link: 'https://youtube.com' },
-    { name: 'Codeforces', icon: SiCodeforces, color: '#1F1C8F', link: 'https://codeforces.com' },
-    { name: 'Leetcode', icon: SiLeetcode, color: '#FFA500', link: 'https://leetcode.com' },
+    { name: 'Instagram', icon: FaInstagram, color: '#E4405F', link: SOCIAL_LINKS.instagram },
+    { name: 'Youtube', icon: FaYoutube, color: '#FF0000', link: SOCIAL_LINKS.youtube },
+    { name: 'Codeforces', icon: SiCodeforces, color: '#1F1C8F', link: SOCIAL_LINKS.codeforces },
+    { name: 'Leetcode', icon: SiLeetcode, color: '#FFA500', link: SOCIAL_LINKS.leetcode },
     { name: 'HackerRank', icon: SiHackerrank, color: '#16db65', link: 'https://hackerrank.com' }
   ];
 
