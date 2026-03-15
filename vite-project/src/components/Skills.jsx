@@ -1,12 +1,51 @@
 import React from 'react';
 
-// Import local logos - replace these paths with your actual import paths
-import claudeLogo from "../assets/logos/anthropic-claude-ai-assistant-logo.jpg"
-import geminiLogo from "../assets/logos/google-gemini-ai-logo.jpg"
-import perplexityLogo from "../assets/logos/perplexity-ai-logo.png"
-import deepseekLogo from "../assets/logos/deepseek-ai-logo.jpg"
-import blackboxLogo from "../assets/logos/blackbox-ai-logo.jpg"
-import pinterestLogo from "../assets/logos/pinterest-logo.png"
+const localLogoModules = import.meta.glob("../assets/logos/*.{png,jpg,jpeg,svg,webp,avif}", {
+  eager: true,
+  import: "default",
+});
+
+const normalizeName = (value) =>
+  value
+    .toLowerCase()
+    .replace(/\.[^.]+$/, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+const prettifyFilename = (filename) =>
+  filename
+    .replace(/\.[^.]+$/, "")
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+
+const logoDisplayNameOverrides = {
+  "apple-icon": "v0.dev",
+};
+
+const localLogoEntries = Object.entries(localLogoModules).map(([filePath, src]) => {
+  const fileName = filePath.split("/").pop() || "";
+  return {
+    fileName,
+    normalized: normalizeName(fileName),
+    src,
+  };
+});
+
+const localLogoByName = Object.fromEntries(
+  localLogoEntries.map(({ normalized, src }) => [normalized, src])
+);
+
+const getLocalLogo = (...nameCandidates) => {
+  for (const candidate of nameCandidates) {
+    const match = localLogoByName[normalizeName(candidate)];
+    if (match) {
+      return match;
+    }
+  }
+  return null;
+};
 
 function Skills() {
   const [showContent, setShowContent] = React.useState(false);
@@ -42,7 +81,7 @@ function Skills() {
     };
   }, []);
 
-  const skillsData = [
+  const baseSkillsData = [
     // Backend & Runtime
     { name: "Node.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
     {
@@ -107,38 +146,59 @@ function Skills() {
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg",
     },
     { name: "Canva", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/canva/canva-original.svg" },
-    { name: "Eraser.io", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" },
-    { name: "Coolors", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" },
+    {
+      name: "Eraser.io",
+      logo: getLocalLogo("erasorio", "eraserio", "erasor", "erasor-io") || "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg",
+    },
+    {
+      name: "Coolors",
+      logo: getLocalLogo("coolors") || "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg",
+    },
     { name: "Snapseed", logo: "https://www.gstatic.com/images/branding/product/1x/snapseed_512dp.png" },
 
     // AI & Assistants
     { name: "ChatGPT", logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" },
     {
       name: "Claude",
-      logo: claudeLogo,
+      logo:
+        getLocalLogo("claude", "anthropic-claude-ai-assistant-logo") ||
+        "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/claude.svg",
       bgColor: "bg-black",
     },
     {
       name: "Gemini",
-      logo: geminiLogo,
+      logo: getLocalLogo("gemini", "google-gemini-ai-logo") || "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/googlegemini.svg",
       bgColor: "bg-gradient-to-br from-blue-400 to-purple-500",
     },
-    { name: "Perplexity", logo: perplexityLogo, bgColor: "bg-gradient-to-br from-purple-400 to-pink-500" },
+    {
+      name: "Perplexity",
+      logo:
+        getLocalLogo("perplexity", "perplexity-ai-logo") ||
+        "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/perplexity.svg",
+      bgColor: "bg-gradient-to-br from-purple-400 to-pink-500",
+    },
     {
       name: "Deepseek",
-      logo: deepseekLogo,
+      logo:
+        getLocalLogo("deepseek", "deepseek-ai-logo") ||
+        "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/deepseek.svg",
       bgColor: "bg-black",
     },
     { name: "Lechat", logo: "https://www.mistral.ai/favicon.ico" },
-    { name: "Blackbox", logo: blackboxLogo, bgColor: "bg-black" },
+    {
+      name: "Blackbox",
+      logo:
+        getLocalLogo("blackbox", "blackbox-ai-logo") ||
+        "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/blackbox.svg",
+      bgColor: "bg-black",
+    },
     { name: "Copilot", logo: "https://github.githubassets.com/images/modules/site/copilot/copilot.png", bgColor: "bg-white" },
 
     // Deployment & Platforms
     { name: "Vercel", logo: "https://assets.vercel.com/image/upload/v1588805858/repositories/vercel/logo.png", bgColor: "bg-white" },
-    { name: "v0", logo: "https://assets.vercel.com/image/upload/v1588805858/repositories/vercel/logo.png", bgColor: "bg-white" },
     {
       name: "Pinterest",
-      logo: pinterestLogo,
+      logo: getLocalLogo("pinterest", "pinterest-logo") || "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/pinterest.svg",
       bgColor: "bg-red-500",
     },
 
@@ -151,8 +211,51 @@ function Skills() {
     },
     { name: "VS Code", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" },
     { name: "Git", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },
-    { name: "OneNote", logo: "https://cdn-icons-png.flaticon.com/512/732/732220.png", bgColor: "bg-white" },
+    {
+      name: "OneNote",
+      logo:
+        getLocalLogo("onenote") ||
+        "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/microsoftonenote.svg",
+      bgColor: "bg-white",
+    },
+    {
+      name: "Adobe Express",
+      logo: getLocalLogo("adobeexpress") || "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/adobeexpress.svg",
+      bgColor: "bg-white",
+    },
   ];
+
+  const explicitlyUsedLocalLogos = new Set([
+    "claude",
+    "anthropic-claude-ai-assistant-logo",
+    "gemini",
+    "google-gemini-ai-logo",
+    "perplexity",
+    "perplexity-ai-logo",
+    "deepseek",
+    "deepseek-ai-logo",
+    "blackbox",
+    "blackbox-ai-logo",
+    "pinterest",
+    "pinterest-logo",
+    "onenote",
+    "adobeexpress",
+    "coolors",
+    "erasorio",
+    "eraserio",
+    "erasor",
+    "erasor-io",
+  ]);
+
+  const autoDiscoveredLogoSkills = localLogoEntries
+    .filter(({ normalized }) => !explicitlyUsedLocalLogos.has(normalized))
+    .map(({ fileName, normalized, src }) => ({
+      name: logoDisplayNameOverrides[normalized] || prettifyFilename(fileName),
+      logo: src,
+      bgColor: "bg-white",
+    }));
+
+  const skillsData = [...baseSkillsData, ...autoDiscoveredLogoSkills];
 
   return (
     <div id="skills" ref={sectionRef} className="h-screen bg-[#101010] py-10 px-6 relative overflow-hidden flex items-center">
