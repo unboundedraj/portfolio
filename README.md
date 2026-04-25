@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# unboundedraj — portfolio
 
-## Getting Started
+Personal portfolio site for **Dhruv Raj Singh** ([unboundedraj](https://github.com/unboundedraj) on GitHub). It showcases projects, skills, journey, and ways to get in touch.
 
-First, run the development server:
+This is a living site: layout, copy, and features **change from time to time** as I experiment and ship updates. If something looks different on your next visit, that’s intentional.
+
+### History (React → Next)
+
+An earlier version of this portfolio lived in the same GitHub repo as a **Vite + React** app (the old `vite-project/` layout). **`main` is now the Next.js rewrite**—TypeScript, App Router, and the structure under `src/`. Recent commits walk through that migration (modular Next landing first, then Journey, footer, and ongoing polish). If you cloned the repo long ago, pull fresh: the default branch matches what ships today.
+
+---
+
+## Collaborate
+
+I’m open to interesting work, side projects, and conversations with other builders. If you’d like to connect, use the **Contact** section on the site, or reach out on [LinkedIn](https://www.linkedin.com/in/dhruvrajsingh19/).
+
+---
+
+## Stack
+
+| Area        | Details                                      |
+| ----------- | -------------------------------------------- |
+| Framework   | [Next.js](https://nextjs.org/) 16 (App Router) |
+| UI          | React 19, [Tailwind CSS](https://tailwindcss.com/) 4 |
+| Language    | TypeScript                                   |
+| Icons       | Lucide React, React Icons                    |
+
+---
+
+## Local development
+
+Prerequisites: **Node.js** (LTS recommended) and **npm**.
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Other scripts:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command       | Description           |
+| ------------- | --------------------- |
+| `npm run dev` | Development server    |
+| `npm run build` | Production build    |
+| `npm run start` | Run production server |
+| `npm run lint`  | ESLint                |
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Project layout (high level)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **`src/app/`** — App Router pages and layout
+- **`src/components/`** — Page sections and shared UI
+- **`src/assets/`** — Images, resume PDF, and static media
+- **`src/lib/`** — Small helpers and shared constants (e.g. social links)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The app is a standard Next.js deployment. Hosting on [Vercel](https://vercel.com/) or any Node-friendly platform works well; see the [Next.js deployment docs](https://nextjs.org/docs/app/building-your-application/deploying) for details.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+*Built with curiosity. Thanks for stopping by.*
