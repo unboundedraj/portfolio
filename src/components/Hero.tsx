@@ -3,7 +3,7 @@
 import { useState, useEffect, type ComponentType } from "react";
 import Image from "next/image";
 import { assetSrc } from "@/lib/assetSrc";
-import dhruvImage from "@/assets/ur.jpg";
+import dhruvImage from "@/assets/dhruv.png";
 import glassImage from "@/assets/glass.jpg";
 import { FaGithub, FaLinkedin, FaXTwitter, FaInstagram, FaYoutube, FaReddit } from "react-icons/fa6";
 import { SiCodeforces, SiLeetcode } from "react-icons/si";
@@ -29,7 +29,7 @@ export default function Hero() {
 
   const allSocials = [
     { name: "Github", icon: FaGithub, color: "#000000", link: SOCIAL_LINKS.github },
-    { name: "Linkedin", icon: FaLinkedin, color: "#0A66C2", link: "https://linkedin.com" },
+    { name: "Linkedin", icon: FaLinkedin, color: "#0A66C2", link: SOCIAL_LINKS.linkedin },
     { name: "X", icon: FaXTwitter, color: "#000000", link: "https://x.com" },
     { name: "Instagram", icon: FaInstagram, color: "#E4405F", link: SOCIAL_LINKS.instagram },
     { name: "Youtube", icon: FaYoutube, color: "#FF0000", link: SOCIAL_LINKS.youtube },

@@ -9,6 +9,7 @@ import Quote from "@/components/Quote";
 import Skills from "@/components/Skills";
 import Works from "@/components/Works";
 import Journey from "@/components/Journey";
+import Footer from "@/components/Footer";
 
 export default function HomePage() {
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function HomePage() {
       <Skills />
       <Works />
       <Journey />
+      <Footer />
     </div>
   );
 }

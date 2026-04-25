@@ -373,23 +373,37 @@ export default function Journey() {
           </div>
         </header>
 
-        <div className="relative mx-auto mt-2 max-w-5xl px-2 sm:mt-4 sm:px-4">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute bottom-0 left-1/2 w-[2px] -translate-x-1/2"
-            style={{
-              top: "calc(-1 * clamp(34px, 7vw, 130px))",
-              background: "rgba(196, 181, 253, 0.95)",
-              boxShadow:
-                "0 0 14px rgba(196,181,253,0.95), 0 0 30px rgba(167,139,250,0.8), 0 0 54px rgba(129,140,248,0.6)",
-            }}
-          />
+        <div className="mx-auto mt-2 max-w-5xl px-2 sm:mt-4 sm:px-4">
+          {/* Line height matches milestones only; quote sits below, not on the stroke. */}
+          <div className="relative">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute bottom-0 left-1/2 w-[2px] -translate-x-1/2"
+              style={{
+                top: "calc(-1 * clamp(34px, 7vw, 130px))",
+                background: "rgba(196, 181, 253, 0.95)",
+                boxShadow:
+                  "0 0 14px rgba(196,181,253,0.95), 0 0 30px rgba(167,139,250,0.8), 0 0 54px rgba(129,140,248,0.6)",
+              }}
+            />
 
-          <div className="relative space-y-2 pt-8 sm:pt-12">
-            {MILESTONES.map((milestone, index) => (
-              <MilestoneRow key={milestone.id} milestone={milestone} index={index} />
-            ))}
+            <div className="relative z-[1] space-y-2 pt-8 sm:pt-12">
+              {MILESTONES.map((milestone, index) => (
+                <MilestoneRow key={milestone.id} milestone={milestone} index={index} />
+              ))}
+            </div>
           </div>
+
+          <p
+            className="mx-auto max-w-3xl px-4 pt-10 pb-6 text-center text-[clamp(0.7rem,2.1vw,0.95rem)] font-medium tracking-[0.18em] text-violet-100/90 sm:pt-12 sm:tracking-[0.26em]"
+            style={{
+              fontFamily: fontOrbitron,
+              textShadow:
+                "0 0 12px rgba(196, 181, 253, 0.45), 0 0 28px rgba(129, 140, 248, 0.22), 0 0 48px rgba(99, 102, 241, 0.12)",
+            }}
+          >
+            &ldquo;And miles to go before I sleep&rdquo;
+          </p>
         </div>
       </div>
     </section>

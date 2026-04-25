@@ -182,7 +182,7 @@ export default function Navbar() {
               style={{
                 backgroundColor: "#121111",
                 width: isHovered ? "calc(100vw - 32px)" : "90px",
-                maxWidth: isHovered ? "550px" : "90px",
+                maxWidth: isHovered ? "620px" : "90px",
                 paddingLeft: "0.875rem",
                 paddingRight: "0.875rem",
                 paddingTop: "0.25rem",
@@ -305,7 +305,7 @@ export default function Navbar() {
 
             {isOpen && (
               <div
-                className="absolute left-1/2 z-40 mt-2 flex w-64 -translate-x-1/2 transform flex-col gap-2 rounded-3xl border border-gray-600 border-opacity-50 p-4 shadow-xl backdrop-blur-2xl md:hidden"
+                className="absolute left-1/2 z-40 mt-2 flex w-[13.5rem] -translate-x-1/2 transform flex-col gap-1 rounded-2xl border border-gray-600 border-opacity-50 px-2.5 py-2 shadow-xl backdrop-blur-2xl md:hidden"
                 style={{
                   backgroundColor: "#121111",
                   animation: "fadeIn 0.3s ease-out",
@@ -318,7 +318,7 @@ export default function Navbar() {
                         type="button"
                         key={link.id}
                         onClick={() => scrollToSection(link.id)}
-                        className="group flex w-full cursor-pointer items-center justify-between rounded-xl border px-4 py-3.5 text-base font-semibold tracking-wide transition-all duration-300"
+                        className="group flex w-full cursor-pointer items-center justify-between rounded-lg border px-2.5 py-2 text-xs font-semibold tracking-wide transition-all duration-300"
                         style={{
                           backgroundColor: "#2a2a2a",
                           color: "#a0a0a0",
@@ -327,11 +327,11 @@ export default function Navbar() {
                           fontFamily: fontOrbitron,
                         }}
                       >
-                        <span className="flex items-center gap-2 transition-transform duration-300 group-hover:translate-x-1">
-                          <Download className="h-4 w-4" />
+                        <span className="flex items-center gap-1.5 transition-transform duration-300 group-hover:translate-x-0.5">
+                          <Download className="h-3 w-3 shrink-0" />
                           {link.name}
                         </span>
-                        <ChevronRight className="h-5 w-5 translate-x-0 opacity-100 transition-all duration-300" />
+                        <ChevronRight className="h-3.5 w-3.5 shrink-0 translate-x-0 opacity-100 transition-all duration-300" />
                       </button>
                     );
                   }
@@ -341,20 +341,20 @@ export default function Navbar() {
                       type="button"
                       key={link.id}
                       onClick={() => scrollToSection(link.id)}
-                      className="group flex w-full cursor-pointer items-center justify-between rounded-xl border border-transparent bg-transparent px-4 py-3.5 text-base font-semibold tracking-wide transition-all duration-300"
+                      className="group flex w-full cursor-pointer items-center justify-between rounded-lg border border-transparent bg-transparent px-2.5 py-2 text-xs font-semibold tracking-wide transition-all duration-300"
                       style={{
                         color: "#b0b0b0",
                         animation: `slideInMobile 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) ${idx * 0.08}s both`,
                         fontFamily: fontOrbitron,
                       }}
                     >
-                      <span className="transition-transform duration-300 group-hover:translate-x-1">{link.name}</span>
+                      <span className="transition-transform duration-300 group-hover:translate-x-0.5">{link.name}</span>
                       <ChevronRight
-                        className="h-5 w-5 transition-all duration-300"
+                        className="h-3.5 w-3.5 shrink-0 transition-all duration-300"
                         style={{
                           color: "#a0a0a0",
                           opacity: 0,
-                          transform: "translateX(-8px)",
+                          transform: "translateX(-6px)",
                         }}
                       />
                     </button>
