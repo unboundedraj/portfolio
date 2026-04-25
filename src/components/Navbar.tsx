@@ -44,6 +44,7 @@ export default function Navbar() {
     { name: "About", id: "about" },
     { name: "Skills", id: "skills" },
     { name: "Works", id: "works" },
+    { name: "Journey", id: "journey" },
     { name: "Contact", id: "contact" },
     { name: "Resume", id: "resume", isSpecial: true },
   ];

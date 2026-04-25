@@ -8,6 +8,7 @@ import About from "@/components/About";
 import Quote from "@/components/Quote";
 import Skills from "@/components/Skills";
 import Works from "@/components/Works";
+import Journey from "@/components/Journey";
 
 export default function HomePage() {
   useEffect(() => {
@@ -27,6 +28,7 @@ export default function HomePage() {
       <Quote />
       <Skills />
       <Works />
+      <Journey />
     </div>
   );
 }
