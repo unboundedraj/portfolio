@@ -62,6 +62,15 @@ Other scripts:
 
 The app is a standard Next.js deployment. Hosting on [Vercel](https://vercel.com/) or any Node-friendly platform works well; see the [Next.js deployment docs](https://nextjs.org/docs/app/building-your-application/deploying) for details.
 
+### Vercel (same project URL after the Vite → Next move)
+
+Keep using your **existing Vercel project** so domains and preview URLs stay the same.
+
+1. **Project → Settings → General → Root Directory** — set to **empty** (repository root). If it still says `vite-project`, clear it: the Next app now lives at the repo root, not inside the old Vite folder.
+2. **Production branch** should match GitHub (usually `main`).
+3. Push any commit to `main` (or use **Deployments → … → Redeploy** on the **latest** deployment only). **Do not** redeploy an old deployment whose commit was removed by a history rewrite—that causes missing-SHA errors.
+4. If deploys stay stuck, **Settings → Git → Disconnect** then reconnect `unboundedraj/portfolio`, then push again.
+
 ---
 
 *Built with curiosity. Thanks for stopping by.*
