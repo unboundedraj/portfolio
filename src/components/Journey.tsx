@@ -1,134 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
-import Image, { type StaticImageData } from "next/image";
+import { FileText } from "lucide-react";
+import { createPortal } from "react-dom";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
+import Image from "next/image";
 
-import logoContentstack from "@/assets/contentstack_logo.jpeg";
-import logoKv from "@/assets/kv_logo.jpg";
+import { JOURNEY_MILESTONES, type JourneyCertificate, type JourneyMilestone } from "@/data/journey";
 
 const fontSpaceGrotesk = "var(--font-space-grotesk), var(--font-poppins), ui-sans-serif, system-ui, sans-serif";
 const fontInter = "var(--font-inter), ui-sans-serif, system-ui, sans-serif";
 const fontOrbitron = "var(--font-orbitron), ui-sans-serif, system-ui, sans-serif";
-
-/** Remote logos (Wikimedia Commons / English Wikipedia). KV & Contentstack use `src/assets`. */
-const LOGO_APS =
-  "https://upload.wikimedia.org/wikipedia/en/b/be/APS_Pune_logo.jpg";
-const LOGO_AIT =
-  "https://upload.wikimedia.org/wikipedia/en/6/6a/AIT_Pune_logo.gif";
-
-type JourneyMilestone = {
-  id: string;
-  title: string;
-  period: string;
-  /** Full place name / address line — shown under the title in Orbitron. */
-  location: string;
-  /** Optional logo: remote URL or imported static asset (`next/image`). */
-  logoUrl?: string | StaticImageData;
-  /** Accessible name for the logo (defaults to `title`). */
-  logoAlt?: string;
-  /** Optional score / percentage — golden neon, shown above the body copy. */
-  marks?: string;
-  /** Optional CGPA (college) — same golden neon treatment as `marks`. */
-  cgpa?: string;
-  description: string;
-  images?: { src: StaticImageData; alt: string }[];
-};
-
-const MILESTONES: JourneyMilestone[] = [
-  {
-    id: "born",
-    title: "Born",
-    period: "Port Blair",
-    location: "Port Blair, Andaman and Nicobar Islands, India",
-    description: "Where it started — then years of new schools, cities, and people across India.",
-  },
-  {
-    id: "aps-chandimandir",
-    title: "Initial schooling",
-    period: "Standards 1–3",
-    location: "Army Public School (APS), Chandimandir, Panchkula, Haryana, India",
-    logoUrl: LOGO_APS,
-    logoAlt: "Army Public School (India) logo",
-    description: "Early years shaped by routine, discipline, and learning alongside peers.",
-  },
-  {
-    id: "aps-lucknow",
-    title: "APS Nehru Road",
-    period: "Standards 4–5",
-    location: "Army Public School, Nehru Road, Lucknow, Uttar Pradesh, India",
-    logoUrl: LOGO_APS,
-    logoAlt: "Army Public School (India) logo",
-    description: "Continued building basics with a heavier tilt toward academics and steady habits.",
-  },
-  {
-    id: "kv-thiruvananthapuram",
-    title: "KV AFS Akkulam",
-    period: "Standards 5–7",
-    location: "Kendriya Vidyalaya, Air Force Station Akkulam, Thiruvananthapuram, Kerala, India",
-    logoUrl: logoKv,
-    logoAlt: "Kendriya Vidyalaya Sangathan logo",
-    description: "Middle school in a new region — new peers, new syllabus, quick adaptation.",
-  },
-  {
-    id: "kv-shillong",
-    title: "KV Happy Valley",
-    period: "Standards 7–9",
-    location: "Kendriya Vidyalaya, Happy Valley, Shillong, Meghalaya, India",
-    logoUrl: logoKv,
-    logoAlt: "Kendriya Vidyalaya Sangathan logo",
-    description: "Hill-town years — balancing classwork with growing curiosity about tech beyond textbooks.",
-  },
-  {
-    id: "kv-lucknow-10",
-    title: "KV Lucknow Cantt",
-    period: "Class 10",
-    location: "Kendriya Vidyalaya, Lucknow Cantt, Uttar Pradesh, India",
-    logoUrl: logoKv,
-    logoAlt: "Kendriya Vidyalaya Sangathan logo",
-    marks: "94.6%",
-    description: "Board year — solid footing before committing fully to the science stream.",
-  },
-  {
-    id: "kv-lucknow-11",
-    title: "KV Lucknow Cantt",
-    period: "Class 11 · PCM",
-    location: "Kendriya Vidyalaya, Lucknow Cantt, Uttar Pradesh, India",
-    logoUrl: logoKv,
-    logoAlt: "Kendriya Vidyalaya Sangathan logo",
-    marks: "88%",
-    description: "PCM year — drilling fundamentals for boards and engineering entrance prep.",
-  },
-  {
-    id: "kv-lucknow-12",
-    title: "KV Lucknow Cantt",
-    period: "Class 12",
-    location: "Kendriya Vidyalaya, Lucknow Cantt, Uttar Pradesh, India",
-    logoUrl: logoKv,
-    logoAlt: "Kendriya Vidyalaya Sangathan logo",
-    marks: "95%",
-    description: "Final school year — closing this chapter before undergrad engineering.",
-  },
-  {
-    id: "ait-pune",
-    title: "B.E. Computer Engineering",
-    period: "Army Institute of Technology, Pune",
-    location: "Army Institute of Technology (AIT), Alandi Road, Dighi Hills, Pune, Maharashtra, India",
-    logoUrl: LOGO_AIT,
-    logoAlt: "Army Institute of Technology, Pune logo",
-    cgpa: "8.65",
-    description: "Undergrad computer engineering — systems thinking, serious code, and shipping real projects.",
-  },
-  {
-    id: "contentstack-intern",
-    title: "Associate Software Engineering Intern",
-    period: "Contentstack",
-    location: "Contentstack — headless CMS & composable DXP (product company)",
-    logoUrl: logoContentstack,
-    logoAlt: "Contentstack",
-    description:
-      "Product engineering at a product-led org: a headless CMS and digital experience platform — shipping features, integrations, and customer-facing experiences.",
-  },
-];
 
 const neonGoldStat: CSSProperties = {
   fontFamily: fontOrbitron,
@@ -136,6 +17,251 @@ const neonGoldStat: CSSProperties = {
   textShadow:
     "0 0 10px rgba(253, 224, 71, 0.95), 0 0 22px rgba(250, 204, 21, 0.75), 0 0 42px rgba(245, 158, 11, 0.45), 0 0 64px rgba(217, 119, 6, 0.25)",
 };
+
+const certificateShellClass =
+  "inline-flex max-w-full items-center gap-2 rounded-lg border border-violet-500/25 bg-violet-950/25 px-2 py-1.5 transition-colors hover:border-violet-400/45 hover:bg-violet-950/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-400/80";
+
+const HOVER_LEAVE_MS = 220;
+
+/** Certificate tiles and hover preview use a fixed 16:9 frame. */
+const CERT_ASPECT = 16 / 9;
+
+type PanelRect = { top: number; left: number; width: number; height: number };
+
+/** Small certificate screenshot; hover (or tap on coarse pointers) shows an enlarged portaled preview. */
+function JourneyCertificateImageHover({
+  cert,
+  cardAlign,
+}: {
+  cert: JourneyCertificate;
+  cardAlign: "left" | "right";
+}) {
+  const src = cert.image!;
+  const rootRef = useRef<HTMLDivElement>(null);
+  const thumbRef = useRef<HTMLButtonElement>(null);
+  const leaveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [open, setOpen] = useState(false);
+  const [canHover, setCanHover] = useState(true);
+  const [panelRect, setPanelRect] = useState<PanelRect | null>(null);
+
+  const cancelLeaveTimer = () => {
+    if (leaveTimerRef.current) {
+      clearTimeout(leaveTimerRef.current);
+      leaveTimerRef.current = null;
+    }
+  };
+
+  const scheduleClose = () => {
+    cancelLeaveTimer();
+    leaveTimerRef.current = setTimeout(() => {
+      setOpen(false);
+      setPanelRect(null);
+    }, HOVER_LEAVE_MS);
+  };
+
+  const updatePanelRect = useCallback(() => {
+    const thumb = thumbRef.current;
+    if (!thumb) return;
+    const r = thumb.getBoundingClientRect();
+    const margin = 10;
+    const availW = window.innerWidth - margin * 2;
+    const availH = window.innerHeight - margin * 2;
+    const capW = Math.min(availW, 960);
+    const capH = Math.min(availH, 720);
+    let w = capW;
+    let h = w / CERT_ASPECT;
+    if (h > capH) {
+      h = capH;
+      w = h * CERT_ASPECT;
+    }
+    let left = cardAlign === "left" ? r.right - w : r.left;
+    left = Math.max(margin, Math.min(left, window.innerWidth - w - margin));
+    let top = r.bottom + 6;
+    if (top + h > window.innerHeight - margin) {
+      top = r.top - h - 6;
+    }
+    top = Math.max(margin, Math.min(top, window.innerHeight - h - margin));
+    setPanelRect({ top, left, width: w, height: h });
+  }, [cardAlign]);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(hover: hover)");
+    const sync = () => setCanHover(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!open) {
+      setPanelRect(null);
+      return;
+    }
+    updatePanelRect();
+    window.addEventListener("scroll", updatePanelRect, true);
+    window.addEventListener("resize", updatePanelRect);
+    return () => {
+      window.removeEventListener("scroll", updatePanelRect, true);
+      window.removeEventListener("resize", updatePanelRect);
+    };
+  }, [open, updatePanelRect]);
+
+  useEffect(() => {
+    if (canHover || !open) return;
+    const close = (e: PointerEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
+        const el = e.target as HTMLElement | null;
+        if (el?.closest?.("[data-journey-cert-popover]")) return;
+        setOpen(false);
+        setPanelRect(null);
+      }
+    };
+    document.addEventListener("pointerdown", close, true);
+    return () => document.removeEventListener("pointerdown", close, true);
+  }, [open, canHover]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        setPanelRect(null);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  const handleThumbEnter = () => {
+    if (!canHover) return;
+    cancelLeaveTimer();
+    setOpen(true);
+  };
+
+  const handleThumbLeave = () => {
+    if (!canHover) return;
+    scheduleClose();
+  };
+
+  const portal =
+    open &&
+    panelRect &&
+    typeof document !== "undefined" &&
+    createPortal(
+      <div
+        data-journey-cert-popover
+        role="dialog"
+        aria-label={cert.alt}
+        className="pointer-events-auto fixed z-[250] overflow-hidden rounded-xl border border-violet-400/40 bg-zinc-950 shadow-[0_24px_64px_-16px_rgba(0,0,0,0.85)]"
+        style={{ top: panelRect.top, left: panelRect.left, width: panelRect.width, height: panelRect.height }}
+        onMouseEnter={canHover ? cancelLeaveTimer : undefined}
+        onMouseLeave={canHover ? scheduleClose : undefined}
+      >
+        <div className="relative h-full w-full">
+          <Image
+            src={src}
+            alt={cert.alt}
+            fill
+            className="object-contain p-2 sm:p-3"
+            sizes="(max-width: 768px) 92vw, 960px"
+          />
+          {!canHover ? (
+            <button
+              type="button"
+              className="absolute right-2 top-2 z-[1] rounded-md border border-white/15 bg-black/70 px-2.5 py-1 text-xs font-medium text-violet-100/95 backdrop-blur-sm"
+              style={{ fontFamily: fontInter }}
+              onClick={() => {
+                setOpen(false);
+                setPanelRect(null);
+              }}
+            >
+              Close
+            </button>
+          ) : null}
+        </div>
+      </div>,
+      document.body,
+    );
+
+  return (
+    <div
+      ref={rootRef}
+      className={`relative inline-flex ${cardAlign === "left" ? "self-end" : "self-start"}`}
+    >
+      <button
+        ref={thumbRef}
+        type="button"
+        className="relative block overflow-hidden rounded-lg border border-violet-500/35 bg-zinc-950/80 shadow-md shadow-black/50 outline-none transition-[border-color,box-shadow] hover:border-violet-400/55 focus-visible:ring-2 focus-visible:ring-violet-400/75"
+        aria-expanded={open}
+        aria-haspopup="dialog"
+        aria-label={cert.alt}
+        onMouseEnter={handleThumbEnter}
+        onMouseLeave={handleThumbLeave}
+        onClick={() => {
+          if (!canHover) {
+            setOpen((v) => {
+              const next = !v;
+              if (!next) setPanelRect(null);
+              return next;
+            });
+          }
+        }}
+      >
+        <span className="relative block aspect-video w-[6.75rem] overflow-hidden sm:w-[7.5rem]">
+          <Image src={src} alt="" aria-hidden className="object-cover" fill sizes="120px" />
+        </span>
+      </button>
+      {portal}
+    </div>
+  );
+}
+
+function JourneyCertificateBadge({ cert, cardAlign }: { cert: JourneyCertificate; cardAlign: "left" | "right" }) {
+  if (cert.image) {
+    return <JourneyCertificateImageHover cert={cert} cardAlign={cardAlign} />;
+  }
+
+  const linkTitle = cert.label ?? cert.alt;
+  const showDocIcon = Boolean(cert.href);
+  const body = (
+    <>
+      {showDocIcon ? (
+        <span
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-white/10 bg-violet-950/40 text-violet-200/90 sm:h-[52px] sm:w-[52px]"
+          aria-hidden
+        >
+          <FileText className="h-5 w-5 sm:h-[22px] sm:w-[22px]" strokeWidth={1.75} />
+        </span>
+      ) : null}
+      <span
+        className="min-w-0 max-w-[10rem] truncate text-left text-[0.7rem] font-medium tracking-wide text-violet-100/95 sm:max-w-[12rem] sm:text-xs"
+        style={{ fontFamily: fontInter }}
+      >
+        {linkTitle}
+      </span>
+    </>
+  );
+
+  if (cert.href) {
+    return (
+      <a
+        href={cert.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={certificateShellClass}
+        title={linkTitle}
+      >
+        {body}
+      </a>
+    );
+  }
+
+  return (
+    <span className={`${certificateShellClass} cursor-default`} title={linkTitle}>
+      {body}
+    </span>
+  );
+}
 
 function JourneyMilestoneCard({
   milestone,
@@ -229,6 +355,20 @@ function JourneyMilestoneCard({
         <p className="text-sm leading-relaxed text-zinc-400 sm:text-base" style={{ fontFamily: fontInter }}>
           {milestone.description}
         </p>
+        {milestone.certificates && milestone.certificates.length > 0 ? (
+          <div className={`mt-4 ${align === "left" ? "lg:flex lg:flex-col lg:items-end" : ""}`}>
+            <ul
+              aria-label="Credential images"
+              className={`flex list-none flex-wrap gap-2.5 p-0 ${align === "left" ? "lg:justify-end" : "justify-start"}`}
+            >
+              {milestone.certificates.map((cert) => (
+                <li key={cert.id}>
+                  <JourneyCertificateBadge cert={cert} cardAlign={align} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
         {milestone.images && milestone.images.length > 0 && (
           <div
             className={`mt-4 flex flex-wrap gap-3 ${align === "left" ? "lg:justify-end" : "lg:justify-start"}`}
@@ -388,7 +528,7 @@ export default function Journey() {
             />
 
             <div className="relative z-[1] space-y-2 pt-8 sm:pt-12">
-              {MILESTONES.map((milestone, index) => (
+              {JOURNEY_MILESTONES.map((milestone, index) => (
                 <MilestoneRow key={milestone.id} milestone={milestone} index={index} />
               ))}
             </div>

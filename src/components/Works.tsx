@@ -42,6 +42,7 @@ import p5i9 from "@/assets/projects/p5i9.png";
 import p5i10 from "@/assets/projects/p5i10.png";
 import p5i11 from "@/assets/projects/p5i11.png";
 import { assetSrc } from "@/lib/assetSrc";
+import { LinkPreview } from "@/components/ui/link-preview";
 
 type Project = {
   id: number;
@@ -383,40 +384,47 @@ export default function Works() {
                             >
                               Domain
                             </h3>
-                            <p
-                              className="break-all text-sm text-white/85 sm:text-base"
-                              style={{ fontFamily: fontInter }}
-                            >
-                              {project.domain}
-                            </p>
+                            <div className="break-all text-sm sm:text-base" style={{ fontFamily: fontInter }}>
+                              <LinkPreview
+                                url={project.liveLink ?? `https://${project.domain}`}
+                                target="_blank"
+                                width={280}
+                                height={175}
+                                className="font-medium text-sky-300/95 underline decoration-sky-500/40 underline-offset-2 transition-colors hover:text-sky-200 hover:decoration-sky-400/70"
+                              >
+                                {project.domain}
+                              </LinkPreview>
+                            </div>
                           </div>
                         )}
                       </div>
 
                       <div className="mt-4 flex flex-wrap gap-2 sm:mt-0 sm:gap-3">
                         {project.githubLink && (
-                          <a
-                            href={project.githubLink}
+                          <LinkPreview
+                            url={project.githubLink}
                             target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 rounded-full border border-white/15 bg-white/15 px-4 py-2 text-xs font-semibold tracking-wide text-white uppercase transition-colors duration-300 hover:bg-white/25 sm:px-5 sm:text-sm"
+                            width={280}
+                            height={175}
+                            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/15 px-4 py-2 text-xs font-semibold tracking-wide text-white uppercase transition-colors duration-300 hover:bg-white/25 sm:px-5 sm:text-sm"
                             style={{ fontFamily: fontOrbitron }}
                           >
-                            <Github className="h-4 w-4" />
+                            <Github className="h-4 w-4 shrink-0" />
                             GitHub
-                          </a>
+                          </LinkPreview>
                         )}
                         {project.liveLink && (
-                          <a
-                            href={project.liveLink}
+                          <LinkPreview
+                            url={project.liveLink}
                             target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 rounded-full bg-blue-500/85 px-4 py-2 text-xs font-semibold tracking-wide text-white uppercase transition-colors duration-300 hover:bg-blue-500 sm:px-5 sm:text-sm"
+                            width={280}
+                            height={175}
+                            className="inline-flex items-center gap-2 rounded-full bg-blue-500/85 px-4 py-2 text-xs font-semibold tracking-wide text-white uppercase transition-colors duration-300 hover:bg-blue-500 sm:px-5 sm:text-sm"
                             style={{ fontFamily: fontOrbitron }}
                           >
-                            <ExternalLink className="h-4 w-4" />
+                            <ExternalLink className="h-4 w-4 shrink-0" />
                             Live Demo
-                          </a>
+                          </LinkPreview>
                         )}
                       </div>
                     </div>
