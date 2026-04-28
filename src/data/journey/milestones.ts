@@ -9,6 +9,7 @@ import certThirdYear3 from "@/assets/journey/certificates/thirdyear (3).png";
 import certFourthYear1 from "@/assets/journey/certificates/journey-cert-01-ai-agents.png";
 import certFourthYear2 from "@/assets/journey/certificates/journey-cert-02-software-architecture-ddd.png";
 import certFourthYear3 from "@/assets/journey/certificates/journey-cert-03-generative-ai.png";
+import monkeytypeTyping from "@/assets/journey/certificates/Monkeytype.png";
 import logoContentstack from "@/assets/contentstack_logo.jpeg";
 import logoKv from "@/assets/kv_logo.jpg";
 
@@ -102,7 +103,14 @@ export const JOURNEY_MILESTONES: JourneyMilestone[] = [
     logoUrl: LOGO_AIT,
     logoAlt: "Army Institute of Technology, Pune logo",
     description:
-      "First year — foundation courses, settling into the program, and early labs. Add what you studied, clubs joined, and first wins here.",
+      "First year — exploring my interests across domains, learning how to learn, and building consistency. This is when I learned touch typing and improved my typing speed significantly.",
+    certificates: [
+      {
+        id: "y1-cert-monkeytype",
+        alt: "Monkeytype typing speed result from first year",
+        image: monkeytypeTyping,
+      },
+    ],
   },
   {
     id: "ait-pune-y2",
@@ -112,7 +120,7 @@ export const JOURNEY_MILESTONES: JourneyMilestone[] = [
     logoUrl: LOGO_AIT,
     logoAlt: "Army Institute of Technology, Pune logo",
     description:
-      "Second year — core CS depth, bigger assignments, and side projects starting to take shape. Note achievements, internships prep, or competitions.",
+      "Second year — I focused on cloud-based courses and lessons, strengthening practical fundamentals and understanding real-world tooling.",
     certificates: [
       {
         id: "y2-cert-1",
@@ -149,7 +157,7 @@ export const JOURNEY_MILESTONES: JourneyMilestone[] = [
     logoUrl: LOGO_AIT,
     logoAlt: "Army Institute of Technology, Pune logo",
     description:
-      "Third year — advanced coursework, internships or research, and shipping more serious work. Summarize roles, tech stack, and standout outcomes.",
+      "Third year — I started taking part in events and hackathons, collaborating more, building under constraints, and improving execution speed.",
     certificates: [
       {
         id: "y3-cert-1",
@@ -177,7 +185,7 @@ export const JOURNEY_MILESTONES: JourneyMilestone[] = [
     logoAlt: "Army Institute of Technology, Pune logo",
     cgpa: "8.65",
     description:
-      "Final year — capstone, placements or higher studies, and consolidating the degree. Final CGPA shown below; add thesis, offers, and what you are most proud of.",
+      "Fourth year — I am still upskilling myself in every other way possible, consistently learning new tools, concepts, and approaches.",
     certificates: [
       {
         id: "y4-cert-1",
