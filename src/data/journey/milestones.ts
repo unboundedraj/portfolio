@@ -1,6 +1,14 @@
-import certAiAgents from "@/assets/journey/certificates/journey-cert-01-ai-agents.png";
-import certSoftwareArch from "@/assets/journey/certificates/journey-cert-02-software-architecture-ddd.png";
-import certGenAi from "@/assets/journey/certificates/journey-cert-03-generative-ai.png";
+import certSecondYear1 from "@/assets/journey/certificates/secondyear.png";
+import certSecondYear2 from "@/assets/journey/certificates/secondyear (2).png";
+import certSecondYear3 from "@/assets/journey/certificates/secondyear3.png";
+import certSecondYear4 from "@/assets/journey/certificates/secondyear4.png";
+import certSecondYear5 from "@/assets/journey/certificates/secondyear5.png";
+import certThirdYear1 from "@/assets/journey/certificates/thirdyear.png";
+import certThirdYear2 from "@/assets/journey/certificates/thirdyear (2).png";
+import certThirdYear3 from "@/assets/journey/certificates/thirdyear (3).png";
+import certFourthYear1 from "@/assets/journey/certificates/journey-cert-01-ai-agents.png";
+import certFourthYear2 from "@/assets/journey/certificates/journey-cert-02-software-architecture-ddd.png";
+import certFourthYear3 from "@/assets/journey/certificates/journey-cert-03-generative-ai.png";
 import logoContentstack from "@/assets/contentstack_logo.jpeg";
 import logoKv from "@/assets/kv_logo.jpg";
 
@@ -105,6 +113,33 @@ export const JOURNEY_MILESTONES: JourneyMilestone[] = [
     logoAlt: "Army Institute of Technology, Pune logo",
     description:
       "Second year — core CS depth, bigger assignments, and side projects starting to take shape. Note achievements, internships prep, or competitions.",
+    certificates: [
+      {
+        id: "y2-cert-1",
+        alt: "Second year certificate 1",
+        image: certSecondYear1,
+      },
+      {
+        id: "y2-cert-2",
+        alt: "Second year certificate 2",
+        image: certSecondYear2,
+      },
+      {
+        id: "y2-cert-3",
+        alt: "Second year certificate 3",
+        image: certSecondYear3,
+      },
+      {
+        id: "y2-cert-4",
+        alt: "Second year certificate 4",
+        image: certSecondYear4,
+      },
+      {
+        id: "y2-cert-5",
+        alt: "Second year certificate 5",
+        image: certSecondYear5,
+      },
+    ],
   },
   {
     id: "ait-pune-y3",
@@ -115,6 +150,23 @@ export const JOURNEY_MILESTONES: JourneyMilestone[] = [
     logoAlt: "Army Institute of Technology, Pune logo",
     description:
       "Third year — advanced coursework, internships or research, and shipping more serious work. Summarize roles, tech stack, and standout outcomes.",
+    certificates: [
+      {
+        id: "y3-cert-1",
+        alt: "Third year certificate 1",
+        image: certThirdYear1,
+      },
+      {
+        id: "y3-cert-2",
+        alt: "Third year certificate 2",
+        image: certThirdYear2,
+      },
+      {
+        id: "y3-cert-3",
+        alt: "Third year certificate 3",
+        image: certThirdYear3,
+      },
+    ],
   },
   {
     id: "ait-pune-y4",
@@ -128,19 +180,19 @@ export const JOURNEY_MILESTONES: JourneyMilestone[] = [
       "Final year — capstone, placements or higher studies, and consolidating the degree. Final CGPA shown below; add thesis, offers, and what you are most proud of.",
     certificates: [
       {
-        id: "y4-cert-ai-agents",
-        alt: "Certificate of completion: AI agents for everyday professionals",
-        image: certAiAgents,
+        id: "y4-cert-1",
+        alt: "Certificate of completion: What Is Generative AI?",
+        image: certFourthYear1,
       },
       {
-        id: "y4-cert-software-architecture-ddd",
-        alt: "Certificate of completion: software architecture and domain-driven design",
-        image: certSoftwareArch,
+        id: "y4-cert-2",
+        alt: "Certificate of completion: Software Architecture: Domain-Driven Design",
+        image: certFourthYear2,
       },
       {
-        id: "y4-cert-generative-ai",
-        alt: "Certificate of completion: what is generative AI",
-        image: certGenAi,
+        id: "y4-cert-3",
+        alt: "Certificate of completion: AI Agents for Everyday Professionals",
+        image: certFourthYear3,
       },
     ],
   },
