@@ -1,8 +1,10 @@
 import certAiAgents from "@/assets/journey/certificates/journey-cert-01-ai-agents.png";
 import certSoftwareArch from "@/assets/journey/certificates/journey-cert-02-software-architecture-ddd.png";
 import certGenAi from "@/assets/journey/certificates/journey-cert-03-generative-ai.png";
+import certDeveloperTools from "@/assets/journey/certificates/DeveloperTools.png";
 import logoContentstack from "@/assets/contentstack_logo.jpeg";
 import logoKv from "@/assets/kv_logo.jpg";
+import secondy1 from "@/assets/journey/second-year.png";
 
 import type { JourneyMilestone } from "./types";
 
@@ -141,6 +143,11 @@ export const JOURNEY_MILESTONES: JourneyMilestone[] = [
         id: "y4-cert-generative-ai",
         alt: "Certificate of completion: what is generative AI",
         image: certGenAi,
+      },
+      {
+        id: "y4-cert-developer-tools",
+        alt: "Certificate of completion: Developer Tools",
+        image: certDeveloperTools,
       },
     ],
   },
