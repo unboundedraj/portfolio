@@ -14,7 +14,6 @@ import scholarship10th from "@/assets/journey/certificates/scholarship10th.jpg";
 import certDeveloperTools from "@/assets/journey/certificates/DeveloperTools.png";
 import logoContentstack from "@/assets/contentstack_logo.jpeg";
 import logoKv from "@/assets/kv_logo.jpg";
-import secondy1 from "@/assets/journey/second-year.png";
 
 import type { JourneyMilestone } from "./types";
 

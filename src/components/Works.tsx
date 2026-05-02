@@ -1,7 +1,10 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
+
 import { useState, useEffect, useRef } from "react";
-import { Github, ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ExternalLink, Github } from "lucide-react";
 import p1i1 from "@/assets/projects/p1i1.png";
 import p1i2 from "@/assets/projects/p1i2.png";
 import p1i3 from "@/assets/projects/p1i3.png";
@@ -252,7 +255,7 @@ export default function Works() {
 
   return (
     <div id="works" className="works min-h-screen px-4 py-10">
-      <div className="mx-auto max-w-6xl">
+      <div className="relative mx-auto max-w-6xl">
         <h1
           className="mb-16 text-center text-4xl font-bold tracking-tight text-white uppercase sm:mb-20 sm:text-5xl sm:tracking-tighter md:text-6xl md:tracking-[-0.03em]"
           style={{ fontFamily: fontSpaceGrotesk }}
@@ -354,7 +357,7 @@ export default function Works() {
                               >
                                 <img src={techIcons[tech.icon]} alt={tech.name} className="h-4 w-4" />
                                 <span
-                                  className={`bg-gradient-to-r ${techGradients[tech.name]} bg-clip-text text-xs font-medium tracking-wide text-transparent sm:text-sm`}
+                                  className={`bg-linear-to-r ${techGradients[tech.name]} bg-clip-text text-xs font-medium tracking-wide text-transparent sm:text-sm`}
                                   style={{ fontFamily: fontInter }}
                                 >
                                   {tech.name}
@@ -434,6 +437,18 @@ export default function Works() {
             );
           })}
         </div>
+
+        <div className="mt-8 flex justify-end sm:mt-10">
+          <Link
+            href="/miniprojects"
+            className="inline-flex items-center gap-2 rounded-full border border-violet-300/20 bg-zinc-950/85 px-4 py-2 text-[0.7rem] font-semibold tracking-[0.18em] text-violet-100/95 uppercase shadow-[0_12px_30px_-18px_rgba(139,92,246,0.7)] backdrop-blur-md transition-all duration-300 hover:border-violet-200/40 hover:bg-zinc-900/95 hover:text-white"
+            style={{ fontFamily: fontOrbitron }}
+          >
+            Explore mini projects
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+
       </div>
     </div>
   );
