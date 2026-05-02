@@ -50,7 +50,7 @@ function AboutCarouselRow({ direction, skills }: { direction: "left" | "right"; 
           skills.map((skill, skillIdx) => (
             <div
               key={`${direction}-${groupIdx}-${skillIdx}`}
-              className="flex-shrink-0 rounded border-2 border-[#affc41] px-4 py-2 text-white lg:px-6 lg:py-3"
+              className="shrink-0 rounded border-2 border-[#affc41] px-4 py-2 text-white lg:px-6 lg:py-3"
             >
               <p className="whitespace-nowrap text-xs font-extralight sm:text-sm lg:text-base">{skill}</p>
             </div>

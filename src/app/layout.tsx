@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Inter, Orbitron, Poppins, Space_Grotesk, Geist } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -50,7 +51,10 @@ export default function RootLayout({
       lang="en"
       className={cn("h-full", inter.variable, poppins.variable, spaceGrotesk.variable, orbitron.variable, "font-sans", geist.variable)}
     >
-      <body className="min-h-full bg-[#101010] font-sans text-zinc-100 antialiased">{children}</body>
+      <body className="min-h-full bg-[#101010] font-sans text-zinc-100 antialiased">
+        {children}
+        <ScrollToTop />
+      </body>
     </html>
   );
 }

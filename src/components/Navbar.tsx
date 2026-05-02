@@ -206,6 +206,7 @@ export default function Navbar() {
                         alt="UR"
                         width={32}
                         height={32}
+                        loading="eager"
                         className="h-7 w-7 flex-shrink-0 rounded-full border-2 object-cover transition-all duration-500 group-hover:rotate-[360deg] md:h-8 md:w-8"
                         style={{
                           borderColor: "#a0a0a0",
@@ -232,6 +233,7 @@ export default function Navbar() {
                         alt="UR"
                         width={32}
                         height={32}
+                        loading="eager"
                         className="h-7 w-7 flex-shrink-0 rounded-full border-2 object-cover transition-all duration-500 group-hover:rotate-[360deg] md:h-8 md:w-8"
                         style={{
                           borderColor: "#a0a0a0",

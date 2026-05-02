@@ -75,7 +75,7 @@ export default function Footer() {
   return (
     <footer
       id="contact"
-      className="relative isolate -mt-16 min-h-[420px] w-full overflow-hidden pt-16 text-zinc-100 sm:-mt-20 sm:pt-20"
+      className="relative isolate -mt-16 min-h-105 w-full overflow-hidden pt-16 text-zinc-100 sm:-mt-20 sm:pt-20"
     >
       <div aria-hidden className="absolute inset-0 -z-30" style={{ backgroundColor: SECTION_BG }} />
 
@@ -175,7 +175,7 @@ export default function Footer() {
                         <div className="mt-2 flex flex-wrap gap-2">
                           <a
                             href={mailto}
-                            className="rounded-full border border-white/14 bg-white/[0.06] px-4 py-2 text-xs font-medium text-white/90 backdrop-blur-sm transition hover:border-orange-400/40 hover:bg-white/[0.1] hover:text-white"
+                            className="rounded-full border border-white/14 bg-white/6 px-4 py-2 text-xs font-medium text-white/90 backdrop-blur-sm transition hover:border-orange-400/40 hover:bg-white/10 hover:text-white"
                           >
                             Default app
                           </a>
@@ -183,7 +183,7 @@ export default function Footer() {
                             href={gmailCompose(address)}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="rounded-full border border-white/14 bg-white/[0.06] px-4 py-2 text-xs font-medium text-white/90 backdrop-blur-sm transition hover:border-orange-400/40 hover:bg-white/[0.1] hover:text-white"
+                            className="rounded-full border border-white/14 bg-white/6 px-4 py-2 text-xs font-medium text-white/90 backdrop-blur-sm transition hover:border-orange-400/40 hover:bg-white/10 hover:text-white"
                           >
                             Gmail
                           </a>
@@ -191,14 +191,14 @@ export default function Footer() {
                             href={outlookCompose(address)}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="rounded-full border border-white/14 bg-white/[0.06] px-4 py-2 text-xs font-medium text-white/90 backdrop-blur-sm transition hover:border-orange-400/40 hover:bg-white/[0.1] hover:text-white"
+                            className="rounded-full border border-white/14 bg-white/6 px-4 py-2 text-xs font-medium text-white/90 backdrop-blur-sm transition hover:border-orange-400/40 hover:bg-white/10 hover:text-white"
                           >
                             Outlook
                           </a>
                           <button
                             type="button"
                             onClick={() => copyEmail(address)}
-                            className="rounded-full border border-white/14 bg-white/[0.06] px-4 py-2 text-xs font-medium text-white/90 backdrop-blur-sm transition hover:border-orange-400/40 hover:bg-white/[0.1] hover:text-white"
+                            className="rounded-full border border-white/14 bg-white/6 px-4 py-2 text-xs font-medium text-white/90 backdrop-blur-sm transition hover:border-orange-400/40 hover:bg-white/10 hover:text-white"
                           >
                             {copiedAddress === address ? "Copied" : "Copy address"}
                           </button>
@@ -211,7 +211,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="my-10 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+          <div className="my-10 h-px bg-linear-to-r from-transparent via-white/15 to-transparent" />
 
           <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-wrap gap-2">
@@ -221,7 +221,7 @@ export default function Footer() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-black/20 px-3.5 py-2 text-xs font-medium text-white/85 backdrop-blur-sm transition hover:border-white/25 hover:bg-white/[0.08] hover:text-white"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-black/20 px-3.5 py-2 text-xs font-medium text-white/85 backdrop-blur-sm transition hover:border-white/25 hover:bg-white/8 hover:text-white"
                 >
                   <Icon className="h-3.5 w-3.5 opacity-50" strokeWidth={1.75} />
                   {label}
@@ -251,7 +251,7 @@ export default function Footer() {
                 download
                 title="Download resume"
                 aria-label="Download resume (PDF)"
-                className="inline-flex items-center gap-1.5 rounded-full border border-white/12 bg-black/20 px-2.5 py-1.5 text-white/80 transition hover:border-orange-400/35 hover:bg-white/[0.06] hover:text-white"
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/12 bg-black/20 px-2.5 py-1.5 text-white/80 transition hover:border-orange-400/35 hover:bg-white/6 hover:text-white"
               >
                 <Download className="h-4 w-4 shrink-0 text-orange-400/90" strokeWidth={2} />
                 <span className="normal-case">Resume</span>
@@ -259,7 +259,7 @@ export default function Footer() {
             </nav>
           </div>
 
-          <div className="mt-10 flex flex-col justify-between gap-3 border-t border-white/[0.06] pt-8 text-[11px] text-white/40 sm:flex-row sm:items-center">
+          <div className="mt-10 flex flex-col justify-between gap-3 border-t border-white/6 pt-8 text-[11px] text-white/40 sm:flex-row sm:items-center">
             <p>© {new Date().getFullYear()} Dhruv Raj Singh · unboundedraj</p>
             <p className="text-white/35">Built with Next.js</p>
           </div>

@@ -86,7 +86,7 @@ export default function SubHero() {
   }, [displayText]);
 
   return (
-    <section className="relative flex min-h-[100dvh] w-full flex-col bg-[#101010] sm:min-h-screen sm:justify-center md:items-center">
+    <section className="relative flex min-h-dvh w-full flex-col bg-[#101010] sm:min-h-screen sm:justify-center md:items-center">
       <style>{`
         @keyframes glitch {
           0%, 100% {

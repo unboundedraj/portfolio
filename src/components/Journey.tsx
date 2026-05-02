@@ -94,10 +94,12 @@ function JourneyCertificateImageHover({
 
   useLayoutEffect(() => {
     if (!open) {
-      setPanelRect(null);
+      // avoid synchronous setState inside layout effect
+      if (typeof window !== "undefined") window.requestAnimationFrame(() => setPanelRect(null));
       return;
     }
-    updatePanelRect();
+    // defer initial measurement to avoid synchronous setState during layout effect
+    if (typeof window !== "undefined") window.requestAnimationFrame(() => updatePanelRect());
     window.addEventListener("scroll", updatePanelRect, true);
     window.addEventListener("resize", updatePanelRect);
     return () => {
@@ -152,7 +154,7 @@ function JourneyCertificateImageHover({
         data-journey-cert-popover
         role="dialog"
         aria-label={cert.alt}
-        className="pointer-events-auto fixed z-[250] overflow-hidden rounded-xl border border-violet-400/40 bg-zinc-950 shadow-[0_24px_64px_-16px_rgba(0,0,0,0.85)]"
+        className="pointer-events-auto fixed z-250 overflow-hidden rounded-xl border border-violet-400/40 bg-zinc-950 shadow-[0_24px_64px_-16px_rgba(0,0,0,0.85)]"
         style={{ top: panelRect.top, left: panelRect.left, width: panelRect.width, height: panelRect.height }}
         onMouseEnter={canHover ? cancelLeaveTimer : undefined}
         onMouseLeave={canHover ? scheduleClose : undefined}
@@ -168,7 +170,7 @@ function JourneyCertificateImageHover({
           {!canHover ? (
             <button
               type="button"
-              className="absolute right-2 top-2 z-[1] rounded-md border border-white/15 bg-black/70 px-2.5 py-1 text-xs font-medium text-violet-100/95 backdrop-blur-sm"
+              className="absolute right-2 top-2 z-1 rounded-md border border-white/15 bg-black/70 px-2.5 py-1 text-xs font-medium text-violet-100/95 backdrop-blur-sm"
               style={{ fontFamily: fontInter }}
               onClick={() => {
                 setOpen(false);
@@ -207,7 +209,7 @@ function JourneyCertificateImageHover({
           }
         }}
       >
-        <span className="relative block aspect-video w-[6.75rem] overflow-hidden sm:w-[7.5rem]">
+        <span className="relative block aspect-video w-27 overflow-hidden sm:w-30">
           <Image src={src} alt="" aria-hidden className="object-cover" fill sizes="120px" />
         </span>
       </button>
@@ -227,14 +229,14 @@ function JourneyCertificateBadge({ cert, cardAlign }: { cert: JourneyCertificate
     <>
       {showDocIcon ? (
         <span
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-white/10 bg-violet-950/40 text-violet-200/90 sm:h-[52px] sm:w-[52px]"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-white/10 bg-violet-950/40 text-violet-200/90 sm:h-13 sm:w-13"
           aria-hidden
         >
-          <FileText className="h-5 w-5 sm:h-[22px] sm:w-[22px]" strokeWidth={1.75} />
+          <FileText className="h-5 w-5 sm:h-5.5 sm:w-5.5" strokeWidth={1.75} />
         </span>
       ) : null}
       <span
-        className="min-w-0 max-w-[10rem] truncate text-left text-[0.7rem] font-medium tracking-wide text-violet-100/95 sm:max-w-[12rem] sm:text-xs"
+        className="min-w-0 max-w-40 truncate text-left text-[0.7rem] font-medium tracking-wide text-violet-100/95 sm:max-w-48 sm:text-xs"
         style={{ fontFamily: fontInter }}
       >
         {linkTitle}
@@ -276,7 +278,7 @@ function JourneyMilestoneCard({
 
   return (
     <div
-      className={`relative z-[1] max-w-xl transition-all duration-[850ms] ease-[cubic-bezier(0.22,1,0.36,1)] lg:max-w-3xl ${
+      className={`relative z-1 max-w-xl transition-all duration-850 ease-[cubic-bezier(0.22,1,0.36,1)] lg:max-w-3xl ${
         align === "left" ? "ml-0 mr-auto lg:pr-8" : "ml-auto mr-0 lg:pl-8"
       } ${
         visible
@@ -285,7 +287,7 @@ function JourneyMilestoneCard({
       }`}
     >
       <article
-        className={`rounded-2xl border border-white/[0.08] bg-zinc-950/55 p-5 shadow-lg shadow-black/30 backdrop-blur-md transition-shadow duration-700 sm:p-6 ${
+        className={`rounded-2xl border border-white/8 bg-zinc-950/55 p-5 shadow-lg shadow-black/30 backdrop-blur-md transition-shadow duration-700 sm:p-6 ${
           align === "left" ? "lg:text-right" : "lg:text-left"
         } ${visible ? "shadow-[0_0_40px_-8px_rgba(139,92,246,0.25)]" : "shadow-black/20"}`}
       >
@@ -376,7 +378,7 @@ function JourneyMilestoneCard({
             {milestone.images.map((img) => (
               <div
                 key={img.alt}
-                className={`relative aspect-video w-full max-w-[280px] overflow-hidden rounded-lg border border-white/10 bg-black/40 transition-all delay-100 duration-700 sm:max-w-xs ${
+                className={`relative aspect-video w-full max-w-70 overflow-hidden rounded-lg border border-white/10 bg-black/40 transition-all delay-100 duration-700 sm:max-w-xs ${
                   visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
                 }`}
               >
@@ -423,12 +425,12 @@ function MilestoneRow({ milestone, index }: { milestone: JourneyMilestone; index
 
       <div className="relative flex justify-center lg:w-9">
         <div
-          className={`relative z-[2] flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-violet-400/60 bg-[#101010] shadow-[0_0_14px_rgba(167,139,250,0.55),0_0_28px_rgba(99,102,241,0.28)] transition-all duration-700 ease-out ${
+          className={`relative z-2 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-violet-400/60 bg-[#101010] shadow-[0_0_14px_rgba(167,139,250,0.55),0_0_28px_rgba(99,102,241,0.28)] transition-all duration-700 ease-out ${
             visible ? "scale-100 ring-2 ring-violet-400/35" : "scale-[0.65] ring-0"
           }`}
         >
           <span
-            className={`h-1.5 w-1.5 rounded-full bg-gradient-to-br from-violet-200 to-indigo-500 shadow-[0_0_8px_rgba(196,181,253,0.85)] transition-transform duration-500 ${
+            className={`h-1.5 w-1.5 rounded-full bg-linear-to-br from-violet-200 to-indigo-500 shadow-[0_0_8px_rgba(196,181,253,0.85)] transition-transform duration-500 ${
               visible ? "scale-100" : "scale-0"
             }`}
           />
@@ -469,8 +471,8 @@ export default function Journey() {
   }, []);
 
   return (
-    <section id="journey" className="relative overflow-hidden bg-[#101010] pb-24 pt-16 sm:pb-32 sm:pt-20">
-      <div className="relative z-[1] mx-auto max-w-full ">
+    <section id="journey" className="relative overflow-hidden bg-[#101010] pb-24 pt-16 sm:pb-32 sm:pt-0">
+      <div className="relative z-1 mx-auto max-w-full ">
         <header ref={headerRef} className="flex flex-col items-center text-center">
           <div className="relative left-1/2 w-screen max-w-none -translate-x-1/2 overflow-hidden">
             <div
@@ -485,7 +487,7 @@ export default function Journey() {
               {/* Full circle with viewport-width diameter; only bottom semicircle is visible due to clipping */}
               <div
                 aria-hidden
-                className="absolute left-1/2 top-0 z-0 h-[100vw] w-[100vw] -translate-x-1/2 -translate-y-1/2 rounded-full border border-violet-100/85"
+                className="absolute left-1/2 top-0 z-0 h-[100vw] w-screen -translate-x-1/2 -translate-y-1/2 rounded-full border border-violet-100/85"
                 style={{
                   boxShadow:
                     "0 0 20px rgba(196,181,253,0.9), 0 0 56px rgba(129,140,248,0.62), 0 0 110px rgba(99,102,241,0.44), inset 0 0 24px rgba(255,255,255,0.2)",
@@ -493,7 +495,7 @@ export default function Journey() {
               />
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[26vw] bg-gradient-to-b from-[#101010] via-[#101010] to-transparent"
+                className="pointer-events-none absolute inset-x-0 top-0 z-1 h-[26vw] bg-linear-to-b from-[#101010] via-[#101010] to-transparent"
               />
 
               <div className="absolute inset-0 z-10 flex items-center justify-center">
@@ -518,7 +520,7 @@ export default function Journey() {
           <div className="relative">
             <div
               aria-hidden
-              className="pointer-events-none absolute bottom-0 left-1/2 w-[2px] -translate-x-1/2"
+              className="pointer-events-none absolute bottom-0 left-1/2 w-0.5 -translate-x-1/2"
               style={{
                 top: "calc(-1 * clamp(34px, 7vw, 130px))",
                 background: "rgba(196, 181, 253, 0.95)",
@@ -527,7 +529,7 @@ export default function Journey() {
               }}
             />
 
-            <div className="relative z-[1] space-y-2 pt-8 sm:pt-12">
+            <div className="relative z-1 space-y-2 pt-8 sm:pt-12">
               {JOURNEY_MILESTONES.map((milestone, index) => (
                 <MilestoneRow key={milestone.id} milestone={milestone} index={index} />
               ))}
