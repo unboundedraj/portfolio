@@ -10,6 +10,7 @@ import certFourthYear1 from "@/assets/journey/certificates/journey-cert-01-ai-ag
 import certFourthYear2 from "@/assets/journey/certificates/journey-cert-02-software-architecture-ddd.png";
 import certFourthYear3 from "@/assets/journey/certificates/journey-cert-03-generative-ai.png";
 import monkeytypeTyping from "@/assets/journey/certificates/Monkeytype.png";
+import scholarship10th from "@/assets/journey/certificates/scholarship10th.jpg";
 import certDeveloperTools from "@/assets/journey/certificates/DeveloperTools.png";
 import logoContentstack from "@/assets/contentstack_logo.jpeg";
 import logoKv from "@/assets/kv_logo.jpg";
@@ -76,6 +77,13 @@ export const JOURNEY_MILESTONES: JourneyMilestone[] = [
     logoAlt: "Kendriya Vidyalaya Sangathan logo",
     marks: "94.6%",
     description: "Board year — solid footing before committing fully to the science stream.",
+    certificates: [
+      {
+        id: "class-10-scholarship",
+        alt: "Scholarship certificate from class 10",
+        image: scholarship10th,
+      },
+    ],
   },
   {
     id: "kv-lucknow-11",
